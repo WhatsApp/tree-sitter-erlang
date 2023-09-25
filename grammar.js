@@ -133,7 +133,7 @@ module.exports = grammar({
 
     rules: {
 
-        source_file: $ => field('forms', repeat($._form)),
+        source_file: $ => field('forms_only', repeat($._form)),
 
         // -------------------------------------------------------------
 

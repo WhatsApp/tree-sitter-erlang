@@ -2825,7 +2825,7 @@
     "type": "source_file",
     "named": true,
     "fields": {
-      "forms": {
+      "forms_only": {
         "multiple": true,
         "required": false,
         "types": [

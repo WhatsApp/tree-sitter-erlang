@@ -2251,7 +2251,7 @@ enum {
   field_field = 20,
   field_fields = 21,
   field_file = 22,
-  field_forms = 23,
+  field_forms_only = 23,
   field_fun = 24,
   field_funs = 25,
   field_guard = 26,
@@ -2302,7 +2302,7 @@ static const char * const ts_field_names[] = {
   [field_field] = "field",
   [field_fields] = "fields",
   [field_file] = "file",
-  [field_forms] = "forms",
+  [field_forms_only] = "forms_only",
   [field_fun] = "fun",
   [field_funs] = "funs",
   [field_guard] = "guard",
@@ -2487,7 +2487,7 @@ static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
   [0] =
-    {field_forms, 0},
+    {field_forms_only, 0},
   [1] =
     {field_name, 1},
   [2] =
