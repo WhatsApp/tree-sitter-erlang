@@ -46,6 +46,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "feature_attribute"
+        },
+        {
+          "type": "SYMBOL",
           "name": "file_attribute"
         },
         {
@@ -1267,6 +1271,65 @@
           "content": {
             "type": "SYMBOL",
             "name": "_deprecated_details"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        }
+      ]
+    },
+    "feature_attribute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "-"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "feature"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "'feature'"
+              },
+              "named": false,
+              "value": "feature"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "FIELD",
+          "name": "feature",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expr"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "FIELD",
+          "name": "flag",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expr"
           }
         },
         {

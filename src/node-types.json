@@ -382,6 +382,10 @@
         "named": true
       },
       {
+        "type": "feature_attribute",
+        "named": true
+      },
+      {
         "type": "file_attribute",
         "named": true
       },
@@ -1425,6 +1429,32 @@
         "types": [
           {
             "type": "_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "feature_attribute",
+    "named": true,
+    "fields": {
+      "feature": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      },
+      "flag": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expr",
             "named": true
           }
         ]
@@ -3407,6 +3437,10 @@
   },
   {
     "type": "export_type",
+    "named": false
+  },
+  {
+    "type": "feature",
     "named": false
   },
   {

@@ -145,6 +145,7 @@ module.exports = grammar({
             $.export_type_attribute,
             $.optional_callbacks_attribute,
             $.compile_options_attribute,
+            $.feature_attribute,
             $.file_attribute,
             $.deprecated_attribute,
             $.record_decl,
@@ -278,6 +279,14 @@ module.exports = grammar({
             ')',
             '.'
         ),
+
+        feature_attribute: $ => seq(
+            '-',
+            atom_const('feature'),
+            '(',
+            field("feature", $._expr), ',',
+            field("flag", $._expr),
+            ')', '.'),
 
         _deprecated_details: $ => choice(
             $.deprecated_module,
