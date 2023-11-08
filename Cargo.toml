@@ -1,6 +1,7 @@
 [package]
 categories = ["parsing", "text-editors"]
 description = "erlang grammar for the tree-sitter parsing library"
+repository = "https://github.com/WhatsApp/tree-sitter-erlang"
 edition = "2018"
 keywords = ["incremental", "parsing", "erlang"]
 license = "MIT"
