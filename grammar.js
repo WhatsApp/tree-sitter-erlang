@@ -368,9 +368,13 @@ module.exports = grammar({
 
         attr_name: $ => seq('-', field("name", $._name)),
 
-        fun_decl: $ => seq(
-            sepBy1(optional(';'), field("clauses", $._function_or_macro_clause)),
-            '.'
+        fun_decl: $ => prec.right(seq(
+            field("clause", $._function_or_macro_clause),
+            optional($._fun_clause_separator),
+        )),
+        _fun_clause_separator: $ => choice(
+            ';',
+            '.',
         ),
 
         type_sig: $ => seq(

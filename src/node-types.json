@@ -1569,8 +1569,8 @@
     "type": "fun_decl",
     "named": true,
     "fields": {
-      "clauses": {
-        "multiple": true,
+      "clause": {
+        "multiple": false,
         "required": true,
         "types": [
           {

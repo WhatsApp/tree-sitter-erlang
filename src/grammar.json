@@ -2018,48 +2018,40 @@
       ]
     },
     "fun_decl": {
-      "type": "SEQ",
+      "type": "PREC_RIGHT",
+      "value": 0,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "clause",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_function_or_macro_clause"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_fun_clause_separator"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "_fun_clause_separator": {
+      "type": "CHOICE",
       "members": [
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "clauses",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_function_or_macro_clause"
-              }
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "CHOICE",
-                    "members": [
-                      {
-                        "type": "STRING",
-                        "value": ";"
-                      },
-                      {
-                        "type": "BLANK"
-                      }
-                    ]
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "clauses",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "_function_or_macro_clause"
-                    }
-                  }
-                ]
-              }
-            }
-          ]
+          "type": "STRING",
+          "value": ";"
         },
         {
           "type": "STRING",

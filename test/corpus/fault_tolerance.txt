@@ -6,10 +6,9 @@ incomplete behaviour attribute WIP
 
 --------------------------------------------------------------------------------
 
-  (source_file
-    (ERROR
-      (atom)))
-
+(source_file
+  (ERROR
+    (atom)))
 
 ================================================================================
 missing dot after export attribute (limitation)
@@ -20,14 +19,14 @@ missing dot after export attribute (limitation)
 
 --------------------------------------------------------------------------------
 
-  (source_file
-    (export_attribute
-      (fa
-        (atom)
-        (arity
-          (integer))))
-    (export_attribute
-      (MISSING ".")))
+(source_file
+  (export_attribute
+    (fa
+      (atom)
+      (arity
+        (integer))))
+  (export_attribute
+    (MISSING ".")))
 
 ================================================================================
 missing dot after variable (limitation)
@@ -37,11 +36,14 @@ missing dot after variable (limitation)
 
 --------------------------------------------------------------------------------
 
-  (source_file
-    (ERROR
+(source_file
+  (fun_decl
+    (function_clause
       (atom)
       (expr_args
-        (var))))
+        (var))
+      (clause_body
+        (MISSING atom)))))
 
 ================================================================================
 function after missing dot (limitation)
@@ -53,19 +55,20 @@ function after missing dot (limitation)
 
 --------------------------------------------------------------------------------
 
-    (source_file
-      (fun_decl
-        (function_clause
-          (atom)
-          (expr_args)
-          (clause_body
-            (atom)))
-        (function_clause
-          (atom)
-          (expr_args)
-          (clause_body
-            (atom))))
-      (comment))
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (atom))))
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (atom))))
+  (comment))
 
 ================================================================================
 function reference missing dot (limitation)
@@ -76,13 +79,13 @@ function reference missing dot (limitation)
 
 --------------------------------------------------------------------------------
 
-  (source_file
-    (ERROR
-      (atom)
-      (expr_args)
-      (module
-        (atom))
-      (atom)))
+(source_file
+  (ERROR
+    (atom)
+    (expr_args)
+    (module
+      (atom))
+    (atom)))
 
 ================================================================================
 incomplete record index (limitation)
@@ -92,9 +95,14 @@ incomplete record index (limitation)
 
 --------------------------------------------------------------------------------
 
-  (source_file
-    (ERROR
+(source_file
+  (fun_decl
+    (function_clause
       (atom)
       (expr_args)
-      (record_name
-        (atom))))
+      (clause_body
+        (record_index_expr
+          (record_name
+            (atom))
+          (record_field_name
+            (MISSING atom)))))))

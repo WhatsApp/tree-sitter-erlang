@@ -16,7 +16,8 @@ f([] ++ []) -> ok.
           (integer)
           (integer)))
       (clause_body
-        (atom)))
+        (atom))))
+  (fun_decl
     (function_clause
       (atom)
       (expr_args
