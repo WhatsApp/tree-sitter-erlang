@@ -1,3 +1,6 @@
+0.3.0 (2023-11-27)
+* Make trailing separators optional for fun_decl.  This improves error recovery.
+
 0.2.0 (Oct 05, 2023)
 * Add support for OTP 26 feature attributes
 
