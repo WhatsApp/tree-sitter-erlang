@@ -44,7 +44,8 @@ const PREC = {
     DYN_FUNCTION_CLAUSES: 2,
     DYN_GUARD_OR: 3,
     DYN_GUARD_AND: 4,
-    DYN_EXPR: 5,
+    DYN_EXPR_GUARD: 5,
+    DYN_EXPR: 6,
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -127,6 +128,7 @@ module.exports = grammar({
         // This is intentionally ambiguous to simplify the produced tree
         [$._macro_def_replacement, $.replacement_guard_and],
         [$._macro_def_replacement, $.replacement_guard_or],
+        [$._macro_def_replacement, $.replacement_guard_and, $.replacement_expr_guard],
         // Fun type vs regular function `fun()` vs `fun() -> ...`
         [$.fun_type, $.expr_args],
     ],
@@ -900,6 +902,7 @@ module.exports = grammar({
             prec.dynamic(PREC.DYN_CR_CLAUSES, $.replacement_cr_clauses),
             prec.dynamic(PREC.DYN_GUARD_OR, $.replacement_guard_or),
             prec.dynamic(PREC.DYN_GUARD_AND, $.replacement_guard_and),
+            prec.dynamic(PREC.DYN_EXPR_GUARD, $.replacement_expr_guard),
             $.replacement_parens,
         ),
 
@@ -910,6 +913,11 @@ module.exports = grammar({
         replacement_guard_or: $ => sepBy1(';', field("guard", $.replacement_guard_and)),
 
         replacement_guard_and: $ => sepBy1(',', field("guard", $._expr)),
+
+        replacement_expr_guard: $ => seq(
+            field("expr", $._expr),
+            optional($._clause_guard),
+        ),
 
         replacement_parens: $ => seq('(', ')'),
 

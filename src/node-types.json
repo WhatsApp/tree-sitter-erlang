@@ -490,6 +490,10 @@
         "named": true
       },
       {
+        "type": "replacement_expr_guard",
+        "named": true
+      },
+      {
         "type": "replacement_function_clauses",
         "named": true
       },
@@ -2791,6 +2795,32 @@
         "types": [
           {
             "type": "_cr_clause_or_macro",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "replacement_expr_guard",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      },
+      "guard": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "guard",
             "named": true
           }
         ]

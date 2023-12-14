@@ -5280,7 +5280,7 @@
       "members": [
         {
           "type": "PREC_DYNAMIC",
-          "value": 5,
+          "value": 6,
           "content": {
             "type": "SYMBOL",
             "name": "_expr"
@@ -5316,6 +5316,14 @@
           "content": {
             "type": "SYMBOL",
             "name": "replacement_guard_and"
+          }
+        },
+        {
+          "type": "PREC_DYNAMIC",
+          "value": 5,
+          "content": {
+            "type": "SYMBOL",
+            "name": "replacement_expr_guard"
           }
         },
         {
@@ -5453,6 +5461,31 @@
               }
             ]
           }
+        }
+      ]
+    },
+    "replacement_expr_guard": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "expr",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_expr"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_clause_guard"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -6165,6 +6198,11 @@
     [
       "_macro_def_replacement",
       "replacement_guard_or"
+    ],
+    [
+      "_macro_def_replacement",
+      "replacement_guard_and",
+      "replacement_expr_guard"
     ],
     [
       "fun_type",
