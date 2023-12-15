@@ -1,3 +1,6 @@
+0.4.0 (2023-12-15)
+* Enable parsing an expression with guards in a macro replacement
+
 0.3.0 (2023-11-27)
 * Make trailing separators optional for fun_decl.  This improves error recovery.
 
