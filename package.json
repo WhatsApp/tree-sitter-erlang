@@ -6,27 +6,56 @@
     "test": "tree-sitter test",
     "test-highlight": "tree-sitter test -f does-not-exist",
     "generate": "tree-sitter generate",
-    "parse": "tree-sitter parse"
+    "parse": "tree-sitter parse",
+    "install": "node-gyp-build",
+    "prebuildify": "prebuildify --napi --strip"
   },
-    "authors": ["Leandro Ostera <leandro@ostera.io>", "Alan Zimmerman <alanzimm@fb.com>"],
+  "authors": [
+    "Leandro Ostera <leandro@ostera.io>",
+    "Alan Zimmerman <alanzimm@fb.com>"
+  ],
   "license": "Apache-2.0",
   "dependencies": {
-    "nan": "^2.14.1",
+    "tree-sitter-cli": "^0.22.1",
     "prettier": "^2.2.1",
-    "tree-sitter-cli": "^0.20.8"
+    "node-addon-api": "^7.1.0",
+    "node-gyp-build": "^4.8.0"
+  },
+  "peerDependencies": {
+    "tree-sitter": "^0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree_sitter": {
+      "optional": true
+    }
   },
   "main": "bindings/node",
+  "types": "bindings/node",
   "tree-sitter": [
     {
       "scope": "source.erlang",
       "file-types": [
-          "erl",
-          "hrl",
-          "app.src",
-          "app",
-          "escript",
-          "rebar.config"
+        "erl",
+        "hrl",
+        "app.src",
+        "app",
+        "escript",
+        "rebar.config"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
       ]
     }
+  ],
+  "devDependencies": {
+    "prebuildify": "^6.0.0"
+  },
+  "files": [
+    "grammar.js",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**"
   ]
 }

@@ -1045,7 +1045,7 @@ module.exports = grammar({
         // Should match https://www.erlang.org/doc/reference_manual/data_types.html#escape-sequences
         // Regex is based on https://github.com/erlang/otp/blob/30e0b342a50ce70b204a47e1e442e3dc33f9a41b/lib/stdlib/src/erl_scan.erl#L874-L922
         char: $ => token(
-            /\$([^\\]|\\([0-7]{1,3}|x[0-9a-fA-F]{2}|x{[0-9a-fA-F]+}|\^.|\\n|\\\\|.))/,
+            /\$([^\\]|\\([0-7]{1,3}|x[0-9a-fA-F]{2}|x[0-9a-fA-F]+|\^.|\\n|\\\\|.))/,
         ),
 
         atom: $ => token(
