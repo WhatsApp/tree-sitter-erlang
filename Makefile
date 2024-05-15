@@ -27,7 +27,7 @@ debug: gen
 .PHONY: gen
 gen:
 	$(TREE_SITTER) generate
-	ruby -e 'ARGV.each{|f| File.write(f, "// @"+"generated\n\n"+File.read(f))}' src/parser.c src/tree_sitter/parser.h
+	ruby -e 'ARGV.each{|f| File.write(f, "// @"+"generated\n\n"+File.read(f))}' src/parser.c src/tree_sitter/parser.h src/tree_sitter/alloc.h src/tree_sitter/array.h
 	ruby -rjson -e 'ARGV.each{|f| File.write(f, JSON.pretty_generate(JSON.parse(File.read(f)).tap{|j| j["@"+"generated"] = true}))}' src/grammar.json
 	ruby -rjson -e 'ARGV.each{|f| File.write(f, JSON.pretty_generate(JSON.parse(File.read(f)).tap{|j| j << {"@"+"generated" => true}}))}' src/node-types.json
 

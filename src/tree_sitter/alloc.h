@@ -1,7 +1,7 @@
+// @generated
+
 #ifndef TREE_SITTER_ALLOC_H_
 #define TREE_SITTER_ALLOC_H_
-
-/* @generated */
 
 #ifdef __cplusplus
 extern "C" {
