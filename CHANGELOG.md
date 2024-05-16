@@ -1,3 +1,9 @@
+0.6.0 (2024-05-15)
+* Bump tree-sitter-cli to 0.22.5
+
+0.5.0 (2024-03-18)
+* Bump tree-sitter-cli to 0.22.1
+
 0.4.0 (2023-12-15)
 * Enable parsing an expression with guards in a macro replacement
 
