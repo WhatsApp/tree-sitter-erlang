@@ -126,7 +126,6 @@ module.exports = grammar({
         // All can be just a macro and can apprear in the macro definition
         [$._function_or_macro_clause, $._cr_clause_or_macro, $._macro_body_expr],
         // This is intentionally ambiguous to simplify the produced tree
-        [$._macro_def_replacement, $.replacement_guard_and],
         [$._macro_def_replacement, $.replacement_guard_or],
         [$._macro_def_replacement, $.replacement_guard_and, $.replacement_expr_guard],
         // Fun type vs regular function `fun()` vs `fun() -> ...`
