@@ -6122,6 +6122,18 @@
         {
           "type": "SYMBOL",
           "name": "_tq_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_tq_sigil_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_sigil_verbatim_string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_sigil_string"
         }
       ]
     },
@@ -6147,12 +6159,48 @@
       }
     },
     "_sq_string": {
-      "type": "PATTERN",
-      "value": "\"([^\"\\\\]|\\\\([^x\\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\\{[0-9a-fA-F]+\\}|\\^.))*\""
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\""
+          },
+          {
+            "type": "PATTERN",
+            "value": "([^\"\\\\]|\\\\([^x\\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\\{[0-9a-fA-F]+\\}|\\^.))*\""
+          }
+        ]
+      }
     },
     "_tq_string": {
       "type": "PATTERN",
       "value": "\"\"\"\\s*\\n(.|\\n)*\\n\\s*\"\"\""
+    },
+    "_tq_sigil_string": {
+      "type": "PATTERN",
+      "value": "~[sSbB]?\"\"\"\\s*\\n.*\\n\\s*\"\"\""
+    },
+    "_sigil_verbatim_string": {
+      "type": "PATTERN",
+      "value": "~[BS]?\".*\""
+    },
+    "_sigil_string": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "~[bs]\""
+          },
+          {
+            "type": "PATTERN",
+            "value": "([^\"\\\\]|\\\\([^x\\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\\{[0-9a-fA-F]+\\}|\\^.))*\""
+          }
+        ]
+      }
     },
     "char": {
       "type": "TOKEN",

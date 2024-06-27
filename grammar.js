@@ -58,6 +58,14 @@ const sepBy = (sep, x) => optional(sepBy1(sep, x));
 
 const atom_const = (x) => choice(x, alias('\'' + x + '\'', x));
 
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Token components
+//
+///////////////////////////////////////////////////////////////////////////////
+
+const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/;
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Grammar
@@ -1028,6 +1036,9 @@ module.exports = grammar({
       string: $ => choice(
         $._sq_string,
         $._tq_string,
+        $._tq_sigil_string,
+        $._sigil_verbatim_string,
+        $._sigil_string,
       ),
 
         // -------------------------------------------------------------
@@ -1043,12 +1054,20 @@ module.exports = grammar({
             /\d(_?\d)*\.\d(_?\d)*([eE][+-]?\d(_?\d)*)?/,
         ),
 
-        _sq_string: $ => /"([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/,
+        _sq_string: $ => token(seq(/"/, sq_string_base)),
 
         /// Triple-quoted strings.
         /// Start is `"""`, may only be followed by whitespace
         /// End is `"""`, may only be preceded by whitespace
         _tq_string: $ => /"""\s*\n(.|\n)*\n\s*"""/,
+
+        _tq_sigil_string: $ => /~[sSbB]?"""\s*\n.*\n\s*"""/,
+
+        // Verbatim means do not process escape chars
+        _sigil_verbatim_string: $ => /~[BS]?".*"/,
+
+        // Processes string escapes (quoted)
+        _sigil_string: $ => token(seq(/~[bs]"/, sq_string_base)),
 
         // Check via https://regexr.com/
         // Should match https://www.erlang.org/doc/reference_manual/data_types.html#escape-sequences
