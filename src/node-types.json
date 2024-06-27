@@ -2934,6 +2934,12 @@
     }
   },
   {
+    "type": "string",
+    "named": true,
+    "fields": {
+    }
+  },
+  {
     "type": "try_after",
     "named": true,
     "fields": {
@@ -3560,10 +3566,6 @@
   {
     "type": "spec",
     "named": false
-  },
-  {
-    "type": "string",
-    "named": true
   },
   {
     "type": "try",

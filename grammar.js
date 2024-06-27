@@ -1025,6 +1025,11 @@ module.exports = grammar({
             '=/=',
         ),
 
+      string: $ => choice(
+        $._sq_string,
+        $._tq_string,
+      ),
+
         // -------------------------------------------------------------
         // Tokens
 
@@ -1038,7 +1043,12 @@ module.exports = grammar({
             /\d(_?\d)*\.\d(_?\d)*([eE][+-]?\d(_?\d)*)?/,
         ),
 
-        string: $ => /"([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/,
+        _sq_string: $ => /"([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/,
+
+        /// Triple-quoted strings.
+        /// Start is `"""`, may only be followed by whitespace
+        /// End is `"""`, may only be preceded by whitespace
+        _tq_string: $ => /"""\s*\n(.|\n)*\n\s*"""/,
 
         // Check via https://regexr.com/
         // Should match https://www.erlang.org/doc/reference_manual/data_types.html#escape-sequences
