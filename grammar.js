@@ -65,7 +65,43 @@ const atom_const = (x) => choice(x, alias('\'' + x + '\'', x));
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/;
+// const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/;
+const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*/;
+const sq_string_base2 =        /\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.)/;
+const tq_string_base = /""""*\s*\n(.|\n)*\n\s*"*"""/;
+
+// https://www.erlang.org/eeps/eep-0066#string-delimiters
+// () [] {} <>
+// / | ' " ` #
+
+const make_verbatim_sigil_string = (sigil) => choice(
+  seq(sigil, /\(/, /([^\)]|\\\))*/, /\)/),
+  seq(sigil, /\[/, /([^\]]|\\\])*/, /\]/),
+  seq(sigil, /\{/, /([^\}]|\\\})*/, /\}/),
+  seq(sigil, /</,  /([^>]|\\>)*/,  />/),
+
+  seq(sigil, /\//, /([^\/]|\\\/)*/, /\//),
+  seq(sigil, /\|/, /([^\|]|\\\|)*/, /\|/),
+  seq(sigil, /\'/, /([^\']|\\\')*/, /\'/),
+  seq(sigil, /\"/, /([^\"]|\\\")*/, /\"/),
+  seq(sigil, /\`/, /([^\`]|\\\`)*/, /\`/),
+  seq(sigil, /\#/, /([^\#]|\\\#)*/, /\#/),
+);
+
+const make_quoted_sigil_string = (sigil) => choice(
+  seq(sigil, /\(/, repeat(choice(/[^\)]/, sq_string_base2)), /\)/),
+  seq(sigil, /\[/, repeat(choice(/[^\]]/, sq_string_base2)), /\]/),
+  seq(sigil, /\{/, repeat(choice(/[^\}]/, sq_string_base2)), /\}/),
+  seq(sigil, /</,  repeat(choice(/[^>]/,  sq_string_base2)),  />/),
+
+  seq(sigil, /\//, repeat(choice(/[^\/]/, sq_string_base2)), /\//),
+  seq(sigil, /\|/, repeat(choice(/[^\|]/, sq_string_base2)), /\|/),
+  seq(sigil, /\'/, repeat(choice(/[^\']/, sq_string_base2)), /\'/),
+  seq(sigil, /\"/, repeat(choice(/[^\"]/, sq_string_base2)), /\"/),
+  seq(sigil, /\`/, repeat(choice(/[^\`]/, sq_string_base2)), /\`/),
+  seq(sigil, /\#/, repeat(choice(/[^\#]/, sq_string_base2)), /\#/),
+);
+
 ///////////////////////////////////////////////////////////////////////////////
 //
 // Grammar
@@ -1054,7 +1090,11 @@ module.exports = grammar({
             /\d(_?\d)*\.\d(_?\d)*([eE][+-]?\d(_?\d)*)?/,
         ),
 
-        _sq_string: $ => token(seq(/"/, sq_string_base)),
+        _sq_string: $ => token(seq(
+            /"/,
+            sq_string_base,
+            /"/
+        )),
 
         /// Triple-quoted strings.
         /// Start is `"""`, may only be followed by whitespace
@@ -1064,10 +1104,10 @@ module.exports = grammar({
         _tq_sigil_string: $ => /~[sSbB]?"""\s*\n.*\n\s*"""/,
 
         // Verbatim means do not process escape chars
-        _sigil_verbatim_string: $ => /~[BS]?".*"/,
+        _sigil_verbatim_string: $ => token(make_verbatim_sigil_string(/~[BS]/)),
 
         // Processes string escapes (quoted)
-        _sigil_string: $ => token(seq(/~[bs]"/, sq_string_base)),
+        _sigil_string: $ => token(make_quoted_sigil_string(/~[bs]?/)),
 
         // Check via https://regexr.com/
         // Should match https://www.erlang.org/doc/reference_manual/data_types.html#escape-sequences
