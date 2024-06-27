@@ -68,7 +68,6 @@ const atom_const = (x) => choice(x, alias('\'' + x + '\'', x));
 // const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/;
 const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*/;
 const sq_string_base2 =        /\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.)/;
-const tq_string_base = /""""*\s*\n(.|\n)*\n\s*"*"""/;
 
 // https://www.erlang.org/eeps/eep-0066#string-delimiters
 // () [] {} <>
@@ -157,6 +156,7 @@ module.exports = grammar({
     // See https://tree-sitter.github.io/tree-sitter/creating-parsers#external-scanners
     externals: $ => [
       $._tq_string,
+      $._tq_sigil_string,
       // Add means to detect if in error recovery, will only be valid
       // then, as it is unused otherwise
       $.error_sentinel
@@ -1103,8 +1103,6 @@ module.exports = grammar({
             sq_string_base,
             /"/
         )),
-
-        _tq_sigil_string: $ => token(seq(/~[sSbB]?/, tq_string_base)),
 
         // Verbatim means do not process escape chars
         _sigil_verbatim_string: $ => token(make_verbatim_sigil_string(/~[BS]/)),

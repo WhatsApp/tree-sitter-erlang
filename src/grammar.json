@@ -6178,22 +6178,6 @@
         ]
       }
     },
-    "_tq_sigil_string": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "PATTERN",
-            "value": "~[sSbB]?"
-          },
-          {
-            "type": "PATTERN",
-            "value": "\"\"\"\"*\\s*\\n(.|\\n)*\\n\\s*\"*\"\"\""
-          }
-        ]
-      }
-    },
     "_sigil_verbatim_string": {
       "type": "TOKEN",
       "content": {
@@ -6825,6 +6809,10 @@
     {
       "type": "SYMBOL",
       "name": "_tq_string"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "_tq_sigil_string"
     },
     {
       "type": "SYMBOL",

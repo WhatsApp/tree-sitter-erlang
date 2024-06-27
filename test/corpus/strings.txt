@@ -170,13 +170,22 @@ quoted binary explicit sigil in tq string, 5 quotes, with 3 inside
 ================================================================================
 
 f() -> ~b"""""
-        ab"c"\d
+        ab
         """
         """"".
+g() -> """""
+       checking for greedy regex match
+       """"".
 
 --------------------------------------------------------------------------------
 
 (source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (string))))
   (fun_decl
     (function_clause
       (atom)

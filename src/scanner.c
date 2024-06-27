@@ -38,6 +38,8 @@ enum TokenType {
    * start of line The starting and ending `"` count must be the same
    */
   TQ_STRING,
+  /* A TQ_STRING preceded by /~[sSbB]?/ */
+  TQ_SIGIL_STRING,
   /* Will only be in valid_symbols when in error recovery mode */
   ERROR_SENTINEL
 };
@@ -66,12 +68,32 @@ bool tree_sitter_erlang_external_scanner_scan(
     const bool* valid_symbols) {
   (void)unused_payload;
 
-  if (valid_symbols[TQ_STRING]) {
+  if (valid_symbols[TQ_STRING] || valid_symbols[TQ_SIGIL_STRING]) {
     /* Skip any leading whitespace */
     while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
            lexer->lookahead == '\f' || lexer->lookahead == '\r' ||
            lexer->lookahead == '\n') {
       skip(lexer);
+    }
+    bool is_sigil_string = false;
+    if (valid_symbols[TQ_SIGIL_STRING]) {
+      /* Look for /~[sSbB]?/ */
+      if (lexer->lookahead == '~') {
+        is_sigil_string = true;
+        advance(lexer);
+        switch (lexer->lookahead) {
+          case 's':
+          case 'S':
+          case 'b':
+          case 'B':
+            advance(lexer);
+            break;
+          case '"':
+            break;
+          default:
+            return false;
+        }
+      }
     }
 
     /* TODO: break into functions */
@@ -124,7 +146,11 @@ bool tree_sitter_erlang_external_scanner_scan(
               }
               if (check <= 0) {
                 lexer->mark_end(lexer);
-                lexer->result_symbol = TQ_STRING;
+                if (is_sigil_string) {
+                  lexer->result_symbol = TQ_SIGIL_STRING;
+                } else {
+                  lexer->result_symbol = TQ_STRING;
+                }
                 return true;
               }
             } else {
