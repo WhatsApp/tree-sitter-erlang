@@ -65,9 +65,8 @@ const atom_const = (x) => choice(x, alias('\'' + x + '\'', x));
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-// const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*"/;
-const sq_string_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*/;
-const sq_string_base2 =        /\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.)/;
+const sq_string_q_base = /([^"\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*/;
+const sq_string_base =           /\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.)/;
 
 // https://www.erlang.org/eeps/eep-0066#string-delimiters
 // () [] {} <>
@@ -88,17 +87,17 @@ const make_verbatim_sigil_string = (sigil) => choice(
 );
 
 const make_quoted_sigil_string = (sigil) => choice(
-  seq(sigil, /\(/, repeat(choice(/[^\)]/, sq_string_base2)), /\)/),
-  seq(sigil, /\[/, repeat(choice(/[^\]]/, sq_string_base2)), /\]/),
-  seq(sigil, /\{/, repeat(choice(/[^\}]/, sq_string_base2)), /\}/),
-  seq(sigil, /</,  repeat(choice(/[^>]/,  sq_string_base2)),  />/),
+  seq(sigil, /\(/, repeat(choice(/[^\)]/, sq_string_base)), /\)/),
+  seq(sigil, /\[/, repeat(choice(/[^\]]/, sq_string_base)), /\]/),
+  seq(sigil, /\{/, repeat(choice(/[^\}]/, sq_string_base)), /\}/),
+  seq(sigil, /</,  repeat(choice(/[^>]/,  sq_string_base)),  />/),
 
-  seq(sigil, /\//, repeat(choice(/[^\/]/, sq_string_base2)), /\//),
-  seq(sigil, /\|/, repeat(choice(/[^\|]/, sq_string_base2)), /\|/),
-  seq(sigil, /\'/, repeat(choice(/[^\']/, sq_string_base2)), /\'/),
-  seq(sigil, /\"/, repeat(choice(/[^\"]/, sq_string_base2)), /\"/),
-  seq(sigil, /\`/, repeat(choice(/[^\`]/, sq_string_base2)), /\`/),
-  seq(sigil, /\#/, repeat(choice(/[^\#]/, sq_string_base2)), /\#/),
+  seq(sigil, /\//, repeat(choice(/[^\/]/, sq_string_base)), /\//),
+  seq(sigil, /\|/, repeat(choice(/[^\|]/, sq_string_base)), /\|/),
+  seq(sigil, /\'/, repeat(choice(/[^\']/, sq_string_base)), /\'/),
+  seq(sigil, /\"/, repeat(choice(/[^\"]/, sq_string_base)), /\"/),
+  seq(sigil, /\`/, repeat(choice(/[^\`]/, sq_string_base)), /\`/),
+  seq(sigil, /\#/, repeat(choice(/[^\#]/, sq_string_base)), /\#/),
 );
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1100,7 +1099,7 @@ module.exports = grammar({
 
         _sq_string: $ => token(seq(
             /"/,
-            sq_string_base,
+            sq_string_q_base,
             /"/
         )),
 
