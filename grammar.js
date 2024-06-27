@@ -1096,12 +1096,14 @@ module.exports = grammar({
             /"/
         )),
 
-        /// Triple-quoted strings.
-        /// Start is `"""`, may only be followed by whitespace
-        /// End is `"""`, may only be preceded by whitespace
-        _tq_string: $ => /"""\s*\n(.|\n)*\n\s*"""/,
+        // Triple-quoted strings.
+        // Start is three or more `"`, may only be followed by whitespace
+        // End is three or more `"`, may only be preceded by whitespace
+        // Technically the starting and ending count must be the same, we leave
+        // that to the OTP compiler to check
+        _tq_string: $ => tq_string_base,
 
-        _tq_sigil_string: $ => /~[sSbB]?"""\s*\n.*\n\s*"""/,
+        _tq_sigil_string: $ => token(seq(/~[sSbB]?/, tq_string_base)),
 
         // Verbatim means do not process escape chars
         _sigil_verbatim_string: $ => token(make_verbatim_sigil_string(/~[BS]/)),

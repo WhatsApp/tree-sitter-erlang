@@ -6180,11 +6180,23 @@
     },
     "_tq_string": {
       "type": "PATTERN",
-      "value": "\"\"\"\\s*\\n(.|\\n)*\\n\\s*\"\"\""
+      "value": "\"\"\"\"*\\s*\\n(.|\\n)*\\n\\s*\"*\"\"\""
     },
     "_tq_sigil_string": {
-      "type": "PATTERN",
-      "value": "~[sSbB]?\"\"\"\\s*\\n.*\\n\\s*\"\"\""
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "~[sSbB]?"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\"\"\"\"*\\s*\\n(.|\\n)*\\n\\s*\"*\"\"\""
+          }
+        ]
+      }
     },
     "_sigil_verbatim_string": {
       "type": "TOKEN",
