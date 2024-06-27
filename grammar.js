@@ -154,6 +154,14 @@ module.exports = grammar({
         $._string_like
     ],
 
+    // See https://tree-sitter.github.io/tree-sitter/creating-parsers#external-scanners
+    externals: $ => [
+      $._tq_string,
+      // Add means to detect if in error recovery, will only be valid
+      // then, as it is unused otherwise
+      $.error_sentinel
+    ],
+
 
     // The erlfmt grammar tries to parse a complete `define` attribute
     // for an expression, if that fails it tries for a type, if that
@@ -1095,13 +1103,6 @@ module.exports = grammar({
             sq_string_base,
             /"/
         )),
-
-        // Triple-quoted strings.
-        // Start is three or more `"`, may only be followed by whitespace
-        // End is three or more `"`, may only be preceded by whitespace
-        // Technically the starting and ending count must be the same, we leave
-        // that to the OTP compiler to check
-        _tq_string: $ => tq_string_base,
 
         _tq_sigil_string: $ => token(seq(/~[sSbB]?/, tq_string_base)),
 

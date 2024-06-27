@@ -6178,10 +6178,6 @@
         ]
       }
     },
-    "_tq_string": {
-      "type": "PATTERN",
-      "value": "\"\"\"\"*\\s*\\n(.|\\n)*\\n\\s*\"*\"\"\""
-    },
     "_tq_sigil_string": {
       "type": "TOKEN",
       "content": {
@@ -6826,7 +6822,14 @@
 
   ],
   "externals": [
-
+    {
+      "type": "SYMBOL",
+      "name": "_tq_string"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "error_sentinel"
+    }
   ],
   "inline": [
     "_fun_expr",
