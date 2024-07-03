@@ -62,6 +62,14 @@ static inline void skip(TSLexer* lexer) {
 /*   fprintf(stderr, "Scanner lookahead: '%c'.\n", lexer->lookahead); */
 /* } */
 
+static inline bool is_whitespace(TSLexer* lexer) {
+  return (
+      /* The test is based on the ?WHITE_SPACE/1 macro in
+         elp_scan.erl, and matches the one in grammar.js */
+      (lexer->lookahead >= 0x01 && lexer->lookahead <= 0x20) ||
+      (lexer->lookahead >= 0x80 && lexer->lookahead <= 0xA0));
+}
+
 bool tree_sitter_erlang_external_scanner_scan(
     void* unused_payload,
     TSLexer* lexer,
@@ -70,9 +78,7 @@ bool tree_sitter_erlang_external_scanner_scan(
 
   if (valid_symbols[TQ_STRING] || valid_symbols[TQ_SIGIL_STRING]) {
     /* Skip any leading whitespace */
-    while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
-           lexer->lookahead == '\f' || lexer->lookahead == '\r' ||
-           lexer->lookahead == '\n') {
+    while (is_whitespace(lexer)) {
       skip(lexer);
     }
     bool is_sigil_string = false;
@@ -112,8 +118,7 @@ bool tree_sitter_erlang_external_scanner_scan(
             advance(lexer);
           }
           /* skip whitespace to end of line */
-          while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
-                 lexer->lookahead == '\f' || lexer->lookahead == '\r') {
+          while (lexer->lookahead != '\n' && is_whitespace(lexer)) {
             advance(lexer);
           }
 
@@ -129,8 +134,7 @@ bool tree_sitter_erlang_external_scanner_scan(
             if (lexer->lookahead == '\n') {
               advance(lexer);
               /* skip whitespace to first '"' */
-              while (lexer->lookahead == ' ' || lexer->lookahead == '\t' ||
-                     lexer->lookahead == '\f' || lexer->lookahead == '\r') {
+              while (lexer->lookahead != '\n' && is_whitespace(lexer)) {
                 advance(lexer);
               }
 

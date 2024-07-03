@@ -114,7 +114,8 @@ module.exports = grammar({
 
     extras: $ => [
         // $.whitespace causes issues with error recovery,
-        // emulate it manually when traversing the tree
+        // emulate it manually when traversing the tree.
+        // The regexp is based on the ?WHITE_SPACE/1 macro in elp_scan.erl
         /[\x01-\x20\x80-\xA0]/,
         $.comment,
     ],
