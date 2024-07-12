@@ -1,3 +1,6 @@
+0.7.0 (Jul 12, 2024)
+* Add support for OTP 27
+
 0.6.0 (2024-05-15)
 * Bump tree-sitter-cli to 0.22.5
 
