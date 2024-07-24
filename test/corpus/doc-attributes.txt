@@ -176,3 +176,26 @@ f() -> ok.
       (expr_args)
       (clause_body
         (atom)))))
+
+================================================================================
+doc include file
+================================================================================
+
+-doc {file,"../../doc/src/info.md"}.
+f() -> ok.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (wild_attribute
+    (attr_name
+      (atom))
+    (tuple
+      (atom)
+      (string)))
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (atom)))))
