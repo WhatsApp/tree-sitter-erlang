@@ -106,3 +106,26 @@ incomplete record index (limitation)
             (atom))
           (record_field_name
             (MISSING atom)))))))
+
+================================================================================
+Incomplete function after spec
+================================================================================
+
+-spec foo() -> ok.
+foo( -> ok.
+
+--------------------------------------------------------------------------------
+
+  (source_file
+    (spec
+      (atom)
+      (type_sig
+        (expr_args)
+        (atom)))
+    (fun_decl
+      (function_clause
+        (atom)
+        (expr_args
+          (MISSING ")"))
+        (clause_body
+          (atom)))))
