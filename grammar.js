@@ -19,13 +19,13 @@ const PREC = {
     CATCH: 0,
     DCOLON: 1, // `::`
     PIPE: 2, // `|`
-    PREFIX_OP: 3, // prefix op binds directly to its argument
-    MULT_OP: 4, // mult_op is left-associative
-    ADD_OP: 4, // add_op is left-associative
+    EQ: 3, // `=` in Expr
+    PREFIX_OP: 4, // prefix op binds directly to its argument
+    MULT_OP: 5, // mult_op is left-associative
+    ADD_OP: 5, // add_op is left-associative
     DOTDOT: 6, // `..` in Type
     DARROW: 7, // `=>` in Type, Expr
     CEQ: 8, // `:=` in Type, Expr
-    EQ: 12, // `:=` in Expr
     BANG: 13, // `:=` in Expr
     ORELSE: 14, // `:=` in Expr
     ANDALSO: 15, // `:=` in Expr
@@ -503,7 +503,7 @@ module.exports = grammar({
             prec.right(PREC.EQ, seq(
                 field("lhs", $._expr),
                 '=',
-                field("rhs", prec.right($._expr)),
+                field("rhs", $._expr),
             )),
         cond_match_expr: $ =>
             prec.right(PREC.COND_MATCH, seq(

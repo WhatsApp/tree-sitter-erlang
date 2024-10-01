@@ -2509,7 +2509,7 @@
     },
     "match_expr": {
       "type": "PREC_RIGHT",
-      "value": 12,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -2529,12 +2529,8 @@
             "type": "FIELD",
             "name": "rhs",
             "content": {
-              "type": "PREC_RIGHT",
-              "value": 0,
-              "content": {
-                "type": "SYMBOL",
-                "name": "_expr"
-              }
+              "type": "SYMBOL",
+              "name": "_expr"
             }
           }
         ]
@@ -2723,7 +2719,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 4,
+          "value": 5,
           "content": {
             "type": "SEQ",
             "members": [
@@ -2752,7 +2748,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 4,
+          "value": 5,
           "content": {
             "type": "SEQ",
             "members": [
@@ -2783,7 +2779,7 @@
     },
     "unary_op_expr": {
       "type": "PREC",
-      "value": 3,
+      "value": 4,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3253,7 +3249,7 @@
     },
     "unary_op_expr_max": {
       "type": "PREC",
-      "value": 3,
+      "value": 4,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3274,7 +3270,7 @@
     },
     "binary_op_expr_max": {
       "type": "PREC",
-      "value": 4,
+      "value": 5,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5005,7 +5001,7 @@
     },
     "match_catch_pat": {
       "type": "PREC_RIGHT",
-      "value": 12,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5095,7 +5091,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 4,
+          "value": 5,
           "content": {
             "type": "SEQ",
             "members": [
@@ -5124,7 +5120,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 4,
+          "value": 5,
           "content": {
             "type": "SEQ",
             "members": [
