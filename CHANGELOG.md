@@ -1,3 +1,6 @@
+0.8.0 (Oct 4, 2024)
+* Fix corner-case for parsing an expression with the pipe operator
+
 0.7.0 (Jul 12, 2024)
 * Add support for OTP 27
 
