@@ -1,5 +1,4 @@
-# TREE_SITTER=tree-sitter
-TREE_SITTER=npm run
+TREE_SITTER=npx tree-sitter-cli
 
 all: fmt gen test
 
