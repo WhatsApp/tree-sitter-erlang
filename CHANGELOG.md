@@ -1,3 +1,6 @@
+0.9.0 (2024-10-21)
+* Bump tree-sitter-cli to 0.23.2, and bring in tree-sitter-language
+
 0.8.0 (Oct 4, 2024)
 * Fix corner-case for parsing an expression with the pipe operator
 
