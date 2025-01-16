@@ -17,7 +17,7 @@ test-highlight:
 
 .PHONY: update
 update: gen
-	$(TREE_SITTER) test -- --update
+	$(TREE_SITTER) test --update
 
 .PHONY: debug
 debug: gen
