@@ -418,6 +418,10 @@
         "named": true
       },
       {
+        "type": "ssr_definition",
+        "named": true
+      },
+      {
         "type": "type_alias",
         "named": true
       },
@@ -2934,6 +2938,74 @@
     }
   },
   {
+    "type": "ssr_definition",
+    "named": true,
+    "fields": {
+      "lhs": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      },
+      "rhs": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ssr_replacement",
+            "named": true
+          }
+        ]
+      },
+      "when": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "ssr_when",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "ssr_replacement",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "ssr_when",
+    "named": true,
+    "fields": {
+      "guard": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "guard",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "string",
     "named": true,
     "fields": {
@@ -3324,6 +3396,10 @@
     "named": false
   },
   {
+    "type": "==>>",
+    "named": false
+  },
+  {
     "type": "=>",
     "named": false
   },
@@ -3565,6 +3641,10 @@
   },
   {
     "type": "spec",
+    "named": false
+  },
+  {
+    "type": "ssr",
     "named": false
   },
   {

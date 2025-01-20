@@ -210,7 +210,22 @@ module.exports = grammar({
             $.fun_decl,
             // preprocessor, not an OTP abstract form
             $._preprocessor_directive,
+            // Used for Structural Search Replace definitions
+            $.ssr_definition,
         ),
+
+        ssr_definition: $ => prec.right(seq(
+            'ssr', ':',
+            field("lhs", $._expr),
+            field("rhs", optional($.ssr_replacement)),
+            field("when", optional($.ssr_when)),
+            '.'
+        )),
+        ssr_replacement: $ => seq(
+            '==>>',
+            field("expr", $._expr),
+        ),
+        ssr_when: $ => seq('when', field("guard", $.guard)),
 
         _preprocessor_directive: $ => choice(
             $.pp_include,
