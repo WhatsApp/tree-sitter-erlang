@@ -1,3 +1,6 @@
+0.10.0 (2025-01-21)
+* Add a new top-level form to parse Structural Search and Replace templates.
+
 0.9.0 (2024-10-21)
 * Bump tree-sitter-cli to 0.23.2, and bring in tree-sitter-language
 
