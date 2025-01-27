@@ -2346,14 +2346,12 @@
   {
     "type": "pp_else",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "pp_endif",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "pp_if",
@@ -2882,13 +2880,27 @@
   {
     "type": "replacement_parens",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
+      "exprs": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      },
       "forms_only": {
         "multiple": true,
         "required": false,
@@ -3008,8 +3020,7 @@
   {
     "type": "string",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "try_after",
@@ -3690,8 +3701,5 @@
   {
     "type": "}",
     "named": false
-  },
-  {
-    "@generated": true
   }
 ]

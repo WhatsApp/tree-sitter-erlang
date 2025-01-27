@@ -182,11 +182,21 @@ module.exports = grammar({
         [$._macro_def_replacement, $.replacement_guard_and, $.replacement_expr_guard],
         // Fun type vs regular function `fun()` vs `fun() -> ...`
         [$.fun_type, $.expr_args],
+        // Introduced by the exprs choice in the source_file
+        [$.pp_if, $._prefix_op],
+        [$.attr_name, $._prefix_op],
+        [$._expr, $._map_expr_base, $._record_expr_base],
+        [$._expr, $._map_expr_base],
+        [$._expr, $._record_expr_base],
+        [$._function_or_macro_clause, $._macro_body_expr],
     ],
 
     rules: {
 
-        source_file: $ => field('forms_only', repeat($._form)),
+        source_file: $ => choice(
+            field('forms_only', repeat($._form)),
+            field('exprs', repeat(seq($._expr, optional("."))))
+        ),
 
         // -------------------------------------------------------------
 
