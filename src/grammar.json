@@ -1,17 +1,51 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "erlang",
   "word": "atom",
   "rules": {
     "source_file": {
-      "type": "FIELD",
-      "name": "forms_only",
-      "content": {
-        "type": "REPEAT",
-        "content": {
-          "type": "SYMBOL",
-          "name": "_form"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "forms_only",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_form"
+            }
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "exprs",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_expr"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "."
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
         }
-      }
+      ]
     },
     "_form": {
       "type": "CHOICE",
@@ -6895,11 +6929,34 @@
     [
       "fun_type",
       "expr_args"
+    ],
+    [
+      "pp_if",
+      "_prefix_op"
+    ],
+    [
+      "attr_name",
+      "_prefix_op"
+    ],
+    [
+      "_expr",
+      "_map_expr_base",
+      "_record_expr_base"
+    ],
+    [
+      "_expr",
+      "_map_expr_base"
+    ],
+    [
+      "_expr",
+      "_record_expr_base"
+    ],
+    [
+      "_function_or_macro_clause",
+      "_macro_body_expr"
     ]
   ],
-  "precedences": [
-
-  ],
+  "precedences": [],
   "externals": [
     {
       "type": "SYMBOL",
@@ -6944,6 +7001,5 @@
     "_deprecated_fun_arity",
     "_desc",
     "_string_like"
-  ],
-  "@generated": true
+  ]
 }
