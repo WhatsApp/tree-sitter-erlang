@@ -680,19 +680,21 @@ module.exports = grammar({
 
         generator: $ => seq(
             field("lhs", $._expr),
-            '<-',
+            $._generator_op,
             field("rhs", $._expr),
         ),
         b_generator: $ => seq(
             field("lhs", $._expr),
-            '<=',
+            $._b_generator_op,
             field("rhs", $._expr),
         ),
         map_generator: $ => seq(
             field("lhs", $.map_field),
-            '<-',
+            $._generator_op,
             field("rhs", $._expr),
         ),
+        _generator_op: $ => choice('<-', '<:-'),
+        _b_generator_op: $ => choice('<=', '<:='),
 
         tuple: $ => seq(
             '{',

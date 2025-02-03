@@ -781,3 +781,119 @@ f() ->
             (binary_op_expr
               (var)
               (integer))))))))
+
+================================================================================
+strict generator basic
+================================================================================
+f() ->
+   <<2,3,4>> = << <<(X+1)>> || X <:- [1,2,3]>>.
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (match_expr
+          (binary
+            (bin_element
+              (integer))
+            (bin_element
+              (integer))
+            (bin_element
+              (integer)))
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (integer)))))
+            (lc_exprs
+              (generator
+                (var)
+                (list
+                  (integer)
+                  (integer)
+                  (integer))))))))))
+
+================================================================================
+strict generator binary
+================================================================================
+f() ->
+  <<2,3,4>> = << <<(X+1)>> || <<X>> <:= <<1,2,3>> >>.
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (match_expr
+          (binary
+            (bin_element
+              (integer))
+            (bin_element
+              (integer))
+            (bin_element
+              (integer)))
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (integer)))))
+            (lc_exprs
+              (b_generator
+                (binary
+                  (bin_element
+                    (var)))
+                (binary
+                  (bin_element
+                    (integer))
+                  (bin_element
+                    (integer))
+                  (bin_element
+                    (integer)))))))))))
+
+================================================================================
+strict generator map
+================================================================================
+f() ->
+  <<2,12>> = << <<(X*Y)>> || X := Y <:- #{1 => 2, 3 => 4} >>.
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (match_expr
+          (binary
+            (bin_element
+              (integer))
+            (bin_element
+              (integer)))
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (var)))))
+            (lc_exprs
+              (map_generator
+                (map_field
+                  (var)
+                  (var))
+                (map_expr
+                  (map_field
+                    (integer)
+                    (integer))
+                  (map_field
+                    (integer)
+                    (integer)))))))))))
