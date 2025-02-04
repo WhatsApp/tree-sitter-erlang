@@ -1,3 +1,6 @@
+0.11.0 (2025-02-04)
+* Support EEP70 strict generators, coming in OTP28
+
 0.10.0 (2025-01-21)
 * Add a new top-level form to parse Structural Search and Replace templates.
 
