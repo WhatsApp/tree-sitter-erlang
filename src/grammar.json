@@ -91,6 +91,10 @@
         {
           "type": "SYMBOL",
           "name": "ssr_definition"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shebang"
         }
       ]
     },
@@ -6257,6 +6261,13 @@
           "name": "_sigil_string"
         }
       ]
+    },
+    "shebang": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "#!.*"
+      }
     },
     "var": {
       "type": "TOKEN",

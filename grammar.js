@@ -212,6 +212,8 @@ module.exports = grammar({
             $._preprocessor_directive,
             // Used for Structural Search Replace definitions
             $.ssr_definition,
+            // skip escript shebang
+            $.shebang,
         ),
 
         ssr_definition: $ => prec.right(seq(
@@ -1104,6 +1106,8 @@ module.exports = grammar({
 
         // -------------------------------------------------------------
         // Tokens
+
+        shebang: $ => token(/#!.*/),
 
         var: $ => token(/[_A-Z\xC0-\xD6\xD8-\xDE][_@a-zA-Z0-9\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF]*/),
 

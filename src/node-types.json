@@ -414,6 +414,10 @@
         "named": true
       },
       {
+        "type": "shebang",
+        "named": true
+      },
+      {
         "type": "spec",
         "named": true
       },
@@ -3646,6 +3650,10 @@
   {
     "type": "rem",
     "named": false
+  },
+  {
+    "type": "shebang",
+    "named": true
   },
   {
     "type": "spec",

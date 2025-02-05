@@ -116,16 +116,36 @@ foo( -> ok.
 
 --------------------------------------------------------------------------------
 
-  (source_file
-    (spec
+(source_file
+  (spec
+    (atom)
+    (type_sig
+      (expr_args)
+      (atom)))
+  (fun_decl
+    (function_clause
       (atom)
-      (type_sig
-        (expr_args)
-        (atom)))
-    (fun_decl
-      (function_clause
-        (atom)
-        (expr_args
-          (MISSING ")"))
-        (clause_body
-          (atom)))))
+      (expr_args
+        (MISSING ")"))
+      (clause_body
+        (atom)))))
+
+================================================================================
+Shebang, for escript
+================================================================================
+
+#!/usr/bin/env escript
+%% -*- erlang -*-
+foo() -> ok.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (shebang)
+  (comment)
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (atom)))))
