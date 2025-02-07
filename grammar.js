@@ -25,17 +25,16 @@ const PREC = {
     ADD_OP: 5, // add_op is left-associative
     DOTDOT: 6, // `..` in Type
     DARROW: 7, // `=>` in Type, Expr
-    CEQ: 8, // `:=` in Type, Expr
-    BANG: 13, // `:=` in Expr
-    ORELSE: 14, // `:=` in Expr
-    ANDALSO: 15, // `:=` in Expr
-    LIST_OP: 16, // `:=` in Expr
-    COMP_OP: 17, // `:=` in Expr
+    BANG: 13, // `!` in Expr
+    ORELSE: 14, // `orelse` in Expr
+    ANDALSO: 15, // `andalso` in Expr
+    LIST_OP: 16, // `++` / `--` in Expr
+    COMP_OP: 17, // Comparison operators in Expr
 
     // For remote vs binary :
-    CALL: 80,
     REMOTE: 1,
     BIT_EXPR: 2,
+    CALL: 80,
 
     COND_MATCH: 81, // `?=` in maybe expr. Should has lowest priority https://www.erlang.org/eeps/eep-0049#operator-priority
 
@@ -46,6 +45,12 @@ const PREC = {
     DYN_GUARD_AND: 4,
     DYN_EXPR_GUARD: 5,
     DYN_EXPR: 6,
+
+    // Distinguishing between top level forms and expressions.
+    // Given a form *has* to be at the top level (only), we give the
+    // form construct a higher precedence each time.
+    PP_IF: 20, // Conflict between `pp_if` and `_prefix_op`
+    ATTR_NAME: 20, // Conflict between `attr_name` and `_prefix_op`
 };
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -182,11 +187,19 @@ module.exports = grammar({
         [$._macro_def_replacement, $.replacement_guard_and, $.replacement_expr_guard],
         // Fun type vs regular function `fun()` vs `fun() -> ...`
         [$.fun_type, $.expr_args],
+        // Introduced by the exprs choice in the source_file
+        [$._expr, $._map_expr_base, $._record_expr_base],
+        [$._expr, $._map_expr_base],
+        [$._expr, $._record_expr_base],
+        [$._function_or_macro_clause, $._macro_body_expr],
     ],
 
     rules: {
 
-        source_file: $ => field('forms_only', repeat($._form)),
+        source_file: $ => choice(
+            field('forms_only', repeat($._form)),
+            field('exprs', repeat(seq($._expr, optional("."))))
+        ),
 
         // -------------------------------------------------------------
 
@@ -258,7 +271,7 @@ module.exports = grammar({
         pp_ifndef: $ => seq('-', atom_const('ifndef'), '(', field("name", $._macro_name), ')', '.'),
         pp_else: $ => seq('-', atom_const('else'), '.'),
         pp_endif: $ => seq('-', atom_const('endif'), '.'),
-        pp_if: $ => seq('-', atom_const('if'), field("cond", $._expr), '.'),
+        pp_if: $ => prec(PREC.PP_IF, seq('-', atom_const('if'), field("cond", $._expr), '.')),
         pp_elif: $ => seq('-', atom_const('elif'), field("cond", $._expr), '.'),
 
         pp_define: $ => seq(
@@ -436,7 +449,7 @@ module.exports = grammar({
 
         wild_attribute: $ => seq(field("name", $.attr_name), field("value", $._expr), '.'),
 
-        attr_name: $ => seq('-', field("name", $._name)),
+        attr_name: $ => prec(PREC.ATTR_NAME, seq('-', field("name", $._name))),
 
         fun_decl: $ => prec.right(seq(
             field("clause", $._function_or_macro_clause),

@@ -2893,6 +2893,20 @@
     "type": "source_file",
     "named": true,
     "fields": {
+      "exprs": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      },
       "forms_only": {
         "multiple": true,
         "required": false,

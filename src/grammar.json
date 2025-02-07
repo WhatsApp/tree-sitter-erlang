@@ -3,15 +3,48 @@
   "word": "atom",
   "rules": {
     "source_file": {
-      "type": "FIELD",
-      "name": "forms_only",
-      "content": {
-        "type": "REPEAT",
-        "content": {
-          "type": "SYMBOL",
-          "name": "_form"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "forms_only",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_form"
+            }
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "exprs",
+          "content": {
+            "type": "REPEAT",
+            "content": {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_expr"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": "."
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            }
+          }
         }
-      }
+      ]
     },
     "_form": {
       "type": "CHOICE",
@@ -542,43 +575,47 @@
       ]
     },
     "pp_if": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "-"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "if"
-            },
-            {
-              "type": "ALIAS",
-              "content": {
+      "type": "PREC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "-"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
                 "type": "STRING",
-                "value": "'if'"
+                "value": "if"
               },
-              "named": false,
-              "value": "if"
+              {
+                "type": "ALIAS",
+                "content": {
+                  "type": "STRING",
+                  "value": "'if'"
+                },
+                "named": false,
+                "value": "if"
+              }
+            ]
+          },
+          {
+            "type": "FIELD",
+            "name": "cond",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expr"
             }
-          ]
-        },
-        {
-          "type": "FIELD",
-          "name": "cond",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_expr"
+          },
+          {
+            "type": "STRING",
+            "value": "."
           }
-        },
-        {
-          "type": "STRING",
-          "value": "."
-        }
-      ]
+        ]
+      }
     },
     "pp_elif": {
       "type": "SEQ",
@@ -2104,21 +2141,25 @@
       ]
     },
     "attr_name": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "-"
-        },
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_name"
+      "type": "PREC",
+      "value": 20,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "-"
+          },
+          {
+            "type": "FIELD",
+            "name": "name",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_name"
+            }
           }
-        }
-      ]
+        ]
+      }
     },
     "fun_decl": {
       "type": "PREC_RIGHT",
@@ -6932,6 +6973,23 @@
     [
       "fun_type",
       "expr_args"
+    ],
+    [
+      "_expr",
+      "_map_expr_base",
+      "_record_expr_base"
+    ],
+    [
+      "_expr",
+      "_map_expr_base"
+    ],
+    [
+      "_expr",
+      "_record_expr_base"
+    ],
+    [
+      "_function_or_macro_clause",
+      "_macro_body_expr"
     ]
   ],
   "precedences": [
