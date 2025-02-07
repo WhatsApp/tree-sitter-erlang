@@ -1,3 +1,8 @@
+0.12.0 (2025-02-0y)
+* Parse escript shebangs as a top-level form
+* Allow a bare expression as a top-level form. This means the grammar
+  can now handle rebar.config and similar files. By @williamthome
+
 0.11.0 (2025-02-04)
 * Support EEP70 strict generators, coming in OTP28
 
