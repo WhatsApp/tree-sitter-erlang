@@ -2746,7 +2746,7 @@
           }
         },
         {
-          "type": "PREC_RIGHT",
+          "type": "PREC_LEFT",
           "value": 14,
           "content": {
             "type": "SEQ",
@@ -2775,7 +2775,7 @@
           }
         },
         {
-          "type": "PREC_RIGHT",
+          "type": "PREC_LEFT",
           "value": 15,
           "content": {
             "type": "SEQ",
@@ -2834,7 +2834,7 @@
         },
         {
           "type": "PREC_RIGHT",
-          "value": 16,
+          "value": 18,
           "content": {
             "type": "SEQ",
             "members": [
@@ -2863,7 +2863,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 5,
+          "value": 19,
           "content": {
             "type": "SEQ",
             "members": [
@@ -2892,7 +2892,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 5,
+          "value": 20,
           "content": {
             "type": "SEQ",
             "members": [
@@ -2923,7 +2923,7 @@
     },
     "unary_op_expr": {
       "type": "PREC",
-      "value": 4,
+      "value": 21,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3393,7 +3393,7 @@
     },
     "unary_op_expr_max": {
       "type": "PREC",
-      "value": 4,
+      "value": 21,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3414,7 +3414,7 @@
     },
     "binary_op_expr_max": {
       "type": "PREC",
-      "value": 5,
+      "value": 20,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5232,7 +5232,7 @@
         },
         {
           "type": "PREC_RIGHT",
-          "value": 16,
+          "value": 18,
           "content": {
             "type": "SEQ",
             "members": [
@@ -5261,7 +5261,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 5,
+          "value": 19,
           "content": {
             "type": "SEQ",
             "members": [
@@ -5290,7 +5290,7 @@
         },
         {
           "type": "PREC_LEFT",
-          "value": 5,
+          "value": 20,
           "content": {
             "type": "SEQ",
             "members": [

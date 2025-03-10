@@ -897,3 +897,53 @@ f() ->
                   (map_field
                     (integer)
                     (integer)))))))))))
+
+================================================================================
+Operator precedence, =:= vs orelse
+================================================================================
+
+fn(A, B) -> A =:= -1 orelse B =:= -1.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var)
+        (var))
+      (clause_body
+        (binary_op_expr
+          (binary_op_expr
+            (var)
+            (unary_op_expr
+              (integer)))
+          (binary_op_expr
+            (var)
+            (unary_op_expr
+              (integer))))))))
+
+================================================================================
+Operator precedence, and vs >
+================================================================================
+
+fn(X) -> my_is_integer(X) and X > 0.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var))
+      (clause_body
+        (binary_op_expr
+          (binary_op_expr
+            (call
+              (atom)
+              (expr_args
+                (var)))
+            (var))
+          (integer))))))

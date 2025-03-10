@@ -20,16 +20,37 @@ const PREC = {
     DCOLON: 1, // `::`
     PIPE: 2, // `|`
     EQ: 3, // `=` in Expr
-    PREFIX_OP: 4, // prefix op binds directly to its argument
-    MULT_OP: 5, // mult_op is left-associative
-    ADD_OP: 5, // add_op is left-associative
+
     DOTDOT: 6, // `..` in Type
     DARROW: 7, // `=>` in Type, Expr
-    BANG: 13, // `!` in Expr
-    ORELSE: 14, // `orelse` in Expr
-    ANDALSO: 15, // `andalso` in Expr
-    LIST_OP: 16, // `++` / `--` in Expr
+
+
+    // Binary op precedences
+    // see https://www.erlang.org/doc/system/expressions.html#operator-precedence
+    //
+    // Listed in descending order of precedence
+    //  - so earlier entries should have higher tree-sitter precedence
+    // Operator                     | Association
+    // #                            |
+    // Unary + - bnot not           | PREFIX_OP |
+    // / * div rem band and         | MULT_OP   | Left-associative
+    // + - bor bxor bsl bsr or xor  | ADD_OP    | Left-associative
+    // ++ --                        | LIST_OP   | Right-associative
+    // == /= =< < >= > =:= =/=      | COMP_OP   | Non-associative
+    // andalso                      | ANDALSO   | Left-associative
+    // orelse                       | ORELSE    | Left-associative
+    // catch                        |
+    // = !                          | EQ, BANG  | Right-associative
+    // ?=                           | Non-associative
+
+    PREFIX_OP: 21, // prefix op binds directly to its argument
+    MULT_OP: 20, // mult_op is left-associative
+    ADD_OP: 19, // add_op is left-associative
+    LIST_OP: 18, // `++` / `--` in Expr
     COMP_OP: 17, // Comparison operators in Expr
+    ANDALSO: 15, // `andalso` in Expr
+    ORELSE: 14, // `orelse` in Expr
+    BANG: 13, // `!` in Expr
 
     // For remote vs binary :
     REMOTE: 1,
@@ -541,18 +562,20 @@ module.exports = grammar({
                 '?=',
                 field("rhs", prec.right($._expr)),
             )),
+
+        // https://www.erlang.org/doc/system/expressions.html#operator-precedence
         binary_op_expr: $ => choice(
             prec.right(PREC.BANG, seq(
                 field("lhs", $._expr),
                 '!',
                 field("rhs", $._expr),
             )),
-            prec.right(PREC.ORELSE, seq(
+            prec.left(PREC.ORELSE, seq(
                 field("lhs", $._expr),
                 'orelse',
                 field("rhs", $._expr),
             )),
-            prec.right(PREC.ANDALSO, seq(
+            prec.left(PREC.ANDALSO, seq(
                 field("lhs", $._expr),
                 'andalso',
                 field("rhs", $._expr),
