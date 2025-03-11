@@ -1,3 +1,6 @@
+0.13.0 (2025-02-0y)
+* Bump tree-sitter version to 0.22.4
+* Align operator precedence parsing with what the Erlang compiler does
 0.12.0 (2025-02-0y)
 * Parse escript shebangs as a top-level form
 * Allow a bare expression as a top-level form. This means the grammar
