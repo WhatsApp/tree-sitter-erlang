@@ -1842,6 +1842,22 @@
         "required": true,
         "types": [
           {
+            "type": "lc_or_zc_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "lc_or_zc_expr",
+    "named": true,
+    "fields": {
+      "exprs": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
             "type": "_lc_expr",
             "named": true
           }
@@ -3307,6 +3323,10 @@
   },
   {
     "type": "#",
+    "named": false
+  },
+  {
+    "type": "&&",
     "named": false
   },
   {

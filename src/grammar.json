@@ -3581,7 +3581,7 @@
               "name": "exprs",
               "content": {
                 "type": "SYMBOL",
-                "name": "_lc_expr"
+                "name": "lc_or_zc_expr"
               }
             },
             {
@@ -3598,13 +3598,46 @@
                     "name": "exprs",
                     "content": {
                       "type": "SYMBOL",
-                      "name": "_lc_expr"
+                      "name": "lc_or_zc_expr"
                     }
                   }
                 ]
               }
             }
           ]
+        }
+      ]
+    },
+    "lc_or_zc_expr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "exprs",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_lc_expr"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "&&"
+              },
+              {
+                "type": "FIELD",
+                "name": "exprs",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_lc_expr"
+                }
+              }
+            ]
+          }
         }
       ]
     },

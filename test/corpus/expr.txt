@@ -637,17 +637,18 @@ f() ->
             (var)
             (var))
           (lc_exprs
-            (map_generator
-              (map_field
-                (var)
-                (var))
-              (map_expr
+            (lc_or_zc_expr
+              (map_generator
                 (map_field
-                  (integer)
-                  (integer))
-                (map_field
-                  (integer)
-                  (integer))))))))))
+                  (var)
+                  (var))
+                (map_expr
+                  (map_field
+                    (integer)
+                    (integer))
+                  (map_field
+                    (integer)
+                    (integer)))))))))))
 
 ================================================================================
 simple map comprehension with filter
@@ -667,20 +668,22 @@ f() ->
             (var)
             (var))
           (lc_exprs
-            (map_generator
-              (map_field
+            (lc_or_zc_expr
+              (map_generator
+                (map_field
+                  (var)
+                  (var))
+                (map_expr
+                  (map_field
+                    (integer)
+                    (integer))
+                  (map_field
+                    (integer)
+                    (integer)))))
+            (lc_or_zc_expr
+              (binary_op_expr
                 (var)
-                (var))
-              (map_expr
-                (map_field
-                  (integer)
-                  (integer))
-                (map_field
-                  (integer)
-                  (integer))))
-            (binary_op_expr
-              (var)
-              (integer))))))))
+                (integer)))))))))
 
 ================================================================================
 map comprehension with list generator
@@ -702,15 +705,17 @@ f() ->
               (var)
               (integer)))
           (lc_exprs
-            (generator
-              (var)
-              (list
-                (integer)
-                (integer)
-                (integer)))
-            (binary_op_expr
-              (var)
-              (integer))))))))
+            (lc_or_zc_expr
+              (generator
+                (var)
+                (list
+                  (integer)
+                  (integer)
+                  (integer))))
+            (lc_or_zc_expr
+              (binary_op_expr
+                (var)
+                (integer)))))))))
 
 ================================================================================
 map comprehension with binary generator
@@ -730,24 +735,26 @@ f() ->
             (var)
             (var))
           (lc_exprs
-            (b_generator
-              (binary
-                (bin_element
-                  (var))
-                (bin_element
-                  (var)))
-              (binary
-                (bin_element
-                  (integer))
-                (bin_element
-                  (integer))
-                (bin_element
-                  (integer))
-                (bin_element
-                  (integer))))
-            (binary_op_expr
-              (var)
-              (integer))))))))
+            (lc_or_zc_expr
+              (b_generator
+                (binary
+                  (bin_element
+                    (var))
+                  (bin_element
+                    (var)))
+                (binary
+                  (bin_element
+                    (integer))
+                  (bin_element
+                    (integer))
+                  (bin_element
+                    (integer))
+                  (bin_element
+                    (integer)))))
+            (lc_or_zc_expr
+              (binary_op_expr
+                (var)
+                (integer)))))))))
 
 ================================================================================
 list comprehension with map generator
@@ -767,20 +774,22 @@ f() ->
             (var)
             (var))
           (lc_exprs
-            (map_generator
-              (map_field
+            (lc_or_zc_expr
+              (map_generator
+                (map_field
+                  (var)
+                  (var))
+                (map_expr
+                  (map_field
+                    (integer)
+                    (integer))
+                  (map_field
+                    (integer)
+                    (integer)))))
+            (lc_or_zc_expr
+              (binary_op_expr
                 (var)
-                (var))
-              (map_expr
-                (map_field
-                  (integer)
-                  (integer))
-                (map_field
-                  (integer)
-                  (integer))))
-            (binary_op_expr
-              (var)
-              (integer))))))))
+                (integer)))))))))
 
 ================================================================================
 strict generator basic
@@ -811,12 +820,13 @@ f() ->
                     (var)
                     (integer)))))
             (lc_exprs
-              (generator
-                (var)
-                (list
-                  (integer)
-                  (integer)
-                  (integer))))))))))
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)
+                    (integer)))))))))))
 
 ================================================================================
 strict generator binary
@@ -847,17 +857,18 @@ f() ->
                     (var)
                     (integer)))))
             (lc_exprs
-              (b_generator
-                (binary
-                  (bin_element
-                    (var)))
-                (binary
-                  (bin_element
-                    (integer))
-                  (bin_element
-                    (integer))
-                  (bin_element
-                    (integer)))))))))))
+              (lc_or_zc_expr
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))))))))))))
 
 ================================================================================
 strict generator map
@@ -886,17 +897,1046 @@ f() ->
                     (var)
                     (var)))))
             (lc_exprs
-              (map_generator
-                (map_field
-                  (var)
-                  (var))
-                (map_expr
+              (lc_or_zc_expr
+                (map_generator
                   (map_field
-                    (integer)
+                    (var)
+                    (var))
+                  (map_expr
+                    (map_field
+                      (integer)
+                      (integer))
+                    (map_field
+                      (integer)
+                      (integer))))))))))))
+
+================================================================================
+zip generator simple normal and binary
+================================================================================
+f() ->
+  [{X,Y} || X <- [1,2,3] && <<Y>> <= <<4,5,6>>].
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (list_comprehension
+          (tuple
+            (var)
+            (var))
+          (lc_exprs
+            (lc_or_zc_expr
+              (generator
+                (var)
+                (list
+                  (integer)
+                  (integer)
+                  (integer)))
+              (b_generator
+                (binary
+                  (bin_element
+                    (var)))
+                (binary
+                  (bin_element
                     (integer))
-                  (map_field
+                  (bin_element
+                    (integer))
+                  (bin_element
+                    (integer)))))))))))
+
+================================================================================
+zip generator simple normal and normal
+================================================================================
+f() ->
+    begin X = 32, Y = 32, [{X, Y} || X <- [1,2,3] && Y <- [4,5,6]] end.
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (integer))
+          (match_expr
+            (var)
+            (integer))
+          (list_comprehension
+            (tuple
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)
+                    (integer)))
+                (generator
+                  (var)
+                  (list
+                    (integer)
                     (integer)
                     (integer)))))))))))
+
+================================================================================
+zip generator normal list and normal list
+================================================================================
+f() ->
+    begin
+        S1 = [x, y, z],
+        S2 = [5, 10, 15],
+        X = 32, Y = 32,
+        [{X, Y} || X <- S1 && Y <- S2]
+    end.
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (list
+              (atom)
+              (atom)
+              (atom)))
+          (match_expr
+            (var)
+            (list
+              (integer)
+              (integer)
+              (integer)))
+          (match_expr
+            (var)
+            (integer))
+          (match_expr
+            (var)
+            (integer))
+          (list_comprehension
+            (tuple
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (var))
+                (generator
+                  (var)
+                  (var))))))))))
+
+================================================================================
+zip generator strict and map generator
+================================================================================
+
+f() ->
+   begin [{X, Y, K} || X <:- [1,2,3] &&  Y:=K <- #{1=>a, 2=>b, 3=>c}] end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (list_comprehension
+            (tuple
+              (var)
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)
+                    (integer)))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (map_expr
+                    (map_field
+                      (integer)
+                      (atom))
+                    (map_field
+                      (integer)
+                      (atom))
+                    (map_field
+                      (integer)
+                      (atom))))))))))))
+
+================================================================================
+zip generator combined with normal one
+================================================================================
+f() ->
+   begin [{X, W+Y} || X <- [a, b, c] && <<Y>> <= <<2, 4, 6>>, W <- [1,2]] end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (list_comprehension
+            (tuple
+              (var)
+              (binary_op_expr
+                (var)
+                (var)))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (atom)
+                    (atom)
+                    (atom)))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer)))))
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)))))))))))
+
+================================================================================
+zip generator normal followed by zip then filter
+================================================================================
+f() ->
+   begin
+      [{X, W+Y} || W <- [0],
+                   X <- [a, b, c] && <<Y>> <:= <<2, 4, 6>>,
+                   Y<4]
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (list_comprehension
+            (tuple
+              (var)
+              (binary_op_expr
+                (var)
+                (var)))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (integer))))
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (atom)
+                    (atom)
+                    (atom)))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer)))))
+              (lc_or_zc_expr
+                (binary_op_expr
+                  (var)
+                  (integer))))))))))
+
+================================================================================
+zip generator LHS match
+================================================================================
+f() ->
+   begin [{X,Y}|| a=b=X <- [1,2] && Y <-[1,2]] end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (list_comprehension
+            (tuple
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (match_expr
+                    (atom)
+                    (match_expr
+                      (atom)
+                      (var)))
+                  (list
+                    (integer)
+                    (integer)))
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)))))))))))
+
+================================================================================
+zip generator normal followed by zip
+================================================================================
+f() ->
+   begin
+      [{A,B,W} || {Same,W} <- [{a,1}],
+                  {Same,A} <- [{a,1},{b,9},{x,10}] &&
+                  {Same,B} <- [{a,7},{wrong,8},{x,20}]]
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (list_comprehension
+            (tuple
+              (var)
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (tuple
+                    (var)
+                    (var))
+                  (list
+                    (tuple
+                      (atom)
+                      (integer)))))
+              (lc_or_zc_expr
+                (generator
+                  (tuple
+                    (var)
+                    (var))
+                  (list
+                    (tuple
+                      (atom)
+                      (integer))
+                    (tuple
+                      (atom)
+                      (integer))
+                    (tuple
+                      (atom)
+                      (integer))))
+                (generator
+                  (tuple
+                    (var)
+                    (var))
+                  (list
+                    (tuple
+                      (atom)
+                      (integer))
+                    (tuple
+                      (atom)
+                      (integer))
+                    (tuple
+                      (atom)
+                      (integer))))))))))))
+
+================================================================================
+zip generator binary and binary
+================================================================================
+
+f() ->
+   begin
+      X = 32, Y = 32,
+      << <<(X+Y)/integer>> || <<X>> <= <<1,2,3>> && <<Y>> <= <<2,2,2>> >>
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (integer))
+          (match_expr
+            (var)
+            (integer))
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (var)))
+                (bit_type_list
+                  (atom))))
+            (lc_exprs
+              (lc_or_zc_expr
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))))))))))))
+
+================================================================================
+zip generator binary and binary followed by normal
+================================================================================
+f() ->
+   begin
+      X = 32, Y = 32, Z = 32,
+      << <<(X+Y+Z)/integer>> || <<X>> <= <<1,2,3>> && <<Y>> <= <<2,2,2>>,
+                                Z<-[1,2,3] >>
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (integer))
+          (match_expr
+            (var)
+            (integer))
+          (match_expr
+            (var)
+            (integer))
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (binary_op_expr
+                      (var)
+                      (var))
+                    (var)))
+                (bit_type_list
+                  (atom))))
+            (lc_exprs
+              (lc_or_zc_expr
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer)))))
+              (lc_or_zc_expr
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)
+                    (integer)))))))))))
+
+================================================================================
+zip generator three binary lists
+================================================================================
+f() ->
+   begin
+      L1 = <<1, 2, 3>>,
+      L2 = <<1, 1, 1>>,
+      L3 = <<2, 2, 2>>,
+      << <<(X+Y+Z)/integer>> || <<X>> <= L1 && <<Y>> <= L2 && <<Z>> <= L3 >>
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (binary
+              (bin_element
+                (integer))
+              (bin_element
+                (integer))
+              (bin_element
+                (integer))))
+          (match_expr
+            (var)
+            (binary
+              (bin_element
+                (integer))
+              (bin_element
+                (integer))
+              (bin_element
+                (integer))))
+          (match_expr
+            (var)
+            (binary
+              (bin_element
+                (integer))
+              (bin_element
+                (integer))
+              (bin_element
+                (integer))))
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (binary_op_expr
+                      (var)
+                      (var))
+                    (var)))
+                (bit_type_list
+                  (atom))))
+            (lc_exprs
+              (lc_or_zc_expr
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (var))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (var))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (var))))))))))
+
+================================================================================
+zip generator match LHS and normal
+================================================================================
+f() ->
+   begin << <<(X+Y):64>>|| a=b=X <- [1,2] && Y <- [1,2] >> end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (var)))
+                (bit_size_expr
+                  (integer))))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (match_expr
+                    (atom)
+                    (match_expr
+                      (atom)
+                      (var)))
+                  (list
+                    (integer)
+                    (integer)))
+                (generator
+                  (var)
+                  (list
+                    (integer)
+                    (integer)))))))))))
+
+================================================================================
+zip generator match lhs and binary
+================================================================================
+f() ->
+   begin << <<(X+Y):64>>|| a=b=X <- [1,2] && <<Y>> <= <<1,2>> >> end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (var)))
+                (bit_size_expr
+                  (integer))))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (match_expr
+                    (atom)
+                    (match_expr
+                      (atom)
+                      (var)))
+                  (list
+                    (integer)
+                    (integer)))
+                (b_generator
+                  (binary
+                    (bin_element
+                      (var)))
+                  (binary
+                    (bin_element
+                      (integer))
+                    (bin_element
+                      (integer))))))))))))
+
+================================================================================
+zip generator match LHS and map
+================================================================================
+f() ->
+   begin << <<(X+V):64>>|| a=b=X <- [1,2] && _K:=V <- #{a=>1,b=>2}>> end.
+
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (binary_comprehension
+            (binary
+              (bin_element
+                (paren_expr
+                  (binary_op_expr
+                    (var)
+                    (var)))
+                (bit_size_expr
+                  (integer))))
+            (lc_exprs
+              (lc_or_zc_expr
+                (generator
+                  (match_expr
+                    (atom)
+                    (match_expr
+                      (atom)
+                      (var)))
+                  (list
+                    (integer)
+                    (integer)))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (map_expr
+                    (map_field
+                      (atom)
+                      (integer))
+                    (map_field
+                      (atom)
+                      (integer))))))))))))
+
+================================================================================
+zip generator maps from variables
+================================================================================
+f() ->
+   begin
+      M1 = #{a=>1},
+      M2 = #{b=>3},
+      [{K1, K2, V1, V2} || K1 := V1 <- M1 && K2 := V2 <- M2]
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (map_expr
+              (map_field
+                (atom)
+                (integer))))
+          (match_expr
+            (var)
+            (map_expr
+              (map_field
+                (atom)
+                (integer))))
+          (list_comprehension
+            (tuple
+              (var)
+              (var)
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (var))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (var))))))))))
+
+================================================================================
+zip generator maps from variables 2
+================================================================================
+f() ->
+   begin
+      Seq = lists:seq(1, 50),
+        M1 = maps:iterator(#{X=>X || X <- Seq}, ordered),
+        M2 = maps:iterator(#{X=>X || X <- lists:seq(1,50)}, ordered),
+        [X+Y+Z+W || X := Y <- M1 && Z := W <- M2]
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (call
+              (remote
+                (remote_module
+                  (atom))
+                (atom))
+              (expr_args
+                (integer)
+                (integer))))
+          (match_expr
+            (var)
+            (call
+              (remote
+                (remote_module
+                  (atom))
+                (atom))
+              (expr_args
+                (map_comprehension
+                  (map_field
+                    (var)
+                    (var))
+                  (lc_exprs
+                    (lc_or_zc_expr
+                      (generator
+                        (var)
+                        (var)))))
+                (atom))))
+          (match_expr
+            (var)
+            (call
+              (remote
+                (remote_module
+                  (atom))
+                (atom))
+              (expr_args
+                (map_comprehension
+                  (map_field
+                    (var)
+                    (var))
+                  (lc_exprs
+                    (lc_or_zc_expr
+                      (generator
+                        (var)
+                        (call
+                          (remote
+                            (remote_module
+                              (atom))
+                            (atom))
+                          (expr_args
+                            (integer)
+                            (integer)))))))
+                (atom))))
+          (list_comprehension
+            (binary_op_expr
+              (binary_op_expr
+                (binary_op_expr
+                  (var)
+                  (var))
+                (var))
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (var))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (var))))))))))
+
+================================================================================
+zip generator maps from variables 3
+================================================================================
+f() ->
+   begin
+      Seq = lists:seq(1, 50),
+      M3 = maps:iterator(#{X=>X*3 || X <- Seq}, ordered),
+      M4 = maps:iterator(#{X*2=>X*4 || X <- Seq}, ordered),
+      [{X, Y, Z, W} || X := Y <- M3 && Z := W <- M4]
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (match_expr
+            (var)
+            (call
+              (remote
+                (remote_module
+                  (atom))
+                (atom))
+              (expr_args
+                (integer)
+                (integer))))
+          (match_expr
+            (var)
+            (call
+              (remote
+                (remote_module
+                  (atom))
+                (atom))
+              (expr_args
+                (map_comprehension
+                  (map_field
+                    (var)
+                    (binary_op_expr
+                      (var)
+                      (integer)))
+                  (lc_exprs
+                    (lc_or_zc_expr
+                      (generator
+                        (var)
+                        (var)))))
+                (atom))))
+          (match_expr
+            (var)
+            (call
+              (remote
+                (remote_module
+                  (atom))
+                (atom))
+              (expr_args
+                (map_comprehension
+                  (map_field
+                    (binary_op_expr
+                      (var)
+                      (integer))
+                    (binary_op_expr
+                      (var)
+                      (integer)))
+                  (lc_exprs
+                    (lc_or_zc_expr
+                      (generator
+                        (var)
+                        (var)))))
+                (atom))))
+          (list_comprehension
+            (tuple
+              (var)
+              (var)
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (var))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (var))))))))))
+
+================================================================================
+zip generator map and map
+================================================================================
+f() ->
+   begin
+      #{K1 => V1+V2 || K1:=V1 <- #{a=>1} && _K2:=V2 <- #{b=>3}}
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (map_comprehension
+            (map_field
+              (var)
+              (binary_op_expr
+                (var)
+                (var)))
+            (lc_exprs
+              (lc_or_zc_expr
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (map_expr
+                    (map_field
+                      (atom)
+                      (integer))))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (map_expr
+                    (map_field
+                      (atom)
+                      (integer))))))))))))
+
+================================================================================
+zip generator simple
+================================================================================
+f() ->
+   begin
+      #{K=>V || a := b <- #{x => y} && K := V <- #{x => y}}
+   end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (block_expr
+          (map_comprehension
+            (map_field
+              (var)
+              (var))
+            (lc_exprs
+              (lc_or_zc_expr
+                (map_generator
+                  (map_field
+                    (atom)
+                    (atom))
+                  (map_expr
+                    (map_field
+                      (atom)
+                      (atom))))
+                (map_generator
+                  (map_field
+                    (var)
+                    (var))
+                  (map_expr
+                    (map_field
+                      (atom)
+                      (atom))))))))))))
 
 ================================================================================
 Operator precedence, =:= vs orelse

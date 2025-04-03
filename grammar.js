@@ -707,7 +707,11 @@ module.exports = grammar({
             '}',
         ),
 
-        lc_exprs: $ => seq('||', sepBy1(',', field("exprs", $._lc_expr))),
+        lc_exprs: $ => seq('||', sepBy1(',', field("exprs", $.lc_or_zc_expr))),
+
+        lc_or_zc_expr: $ => sepBy1('&&', field("exprs", $._lc_expr)),
+
+
 
         _lc_expr: $ => choice(
             $._expr,
