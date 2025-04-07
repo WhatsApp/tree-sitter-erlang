@@ -402,6 +402,10 @@
         "named": true
       },
       {
+        "type": "nominal",
+        "named": true
+      },
+      {
         "type": "opaque",
         "named": true
       },
@@ -2238,6 +2242,32 @@
     }
   },
   {
+    "type": "nominal",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_name",
+            "named": true
+          }
+        ]
+      },
+      "ty": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_expr",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "opaque",
     "named": true,
     "fields": {
@@ -3647,6 +3677,10 @@
   },
   {
     "type": "module",
+    "named": false
+  },
+  {
+    "type": "nominal",
     "named": false
   },
   {

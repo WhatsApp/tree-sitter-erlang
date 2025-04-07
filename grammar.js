@@ -237,6 +237,7 @@ module.exports = grammar({
             $.deprecated_attribute,
             $.record_decl,
             $.type_alias,
+            $.nominal,
             $.opaque,
             $.spec,
             $.callback,
@@ -436,6 +437,8 @@ module.exports = grammar({
         deprecated_wildcard: $ => "'_'",
 
         type_alias: $ => seq('-', atom_const('type'), $._type_def, '.'),
+
+        nominal: $ => seq('-', atom_const('nominal'), $._type_def, '.'),
 
         opaque: $ => seq('-', atom_const('opaque'), $._type_def, '.'),
 

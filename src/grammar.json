@@ -99,6 +99,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "nominal"
+        },
+        {
+          "type": "SYMBOL",
           "name": "opaque"
         },
         {
@@ -1707,6 +1711,41 @@
               },
               "named": false,
               "value": "type"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type_def"
+        },
+        {
+          "type": "STRING",
+          "value": "."
+        }
+      ]
+    },
+    "nominal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "-"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "nominal"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "STRING",
+                "value": "'nominal'"
+              },
+              "named": false,
+              "value": "nominal"
             }
           ]
         },
