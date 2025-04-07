@@ -6392,15 +6392,33 @@
     "integer": {
       "type": "TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "\\d{1,2}#[0-9a-zA-Z](_?[0-9a-zA-Z])*|\\d(_?\\d)*"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\d(_?\\d)*#[0-9a-zA-Z](_?[0-9a-zA-Z])*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\d(_?\\d)*"
+          }
+        ]
       }
     },
     "float": {
       "type": "TOKEN",
       "content": {
-        "type": "PATTERN",
-        "value": "\\d(_?\\d)*\\.\\d(_?\\d)*([eE][+-]?\\d(_?\\d)*)?"
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "\\d(_?\\d)*\\.\\d(_?\\d)*([eE][+-]?\\d(_?\\d)*)?"
+          },
+          {
+            "type": "PATTERN",
+            "value": "\\d(_?\\d)*#[0-9a-zA-Z](_?[0-9a-zA-Z])*\\.(_?[0-9a-zA-Z])+(#[eE][+-]?\\d(_?\\d)*)?"
+          }
+        ]
       }
     },
     "_sq_string": {

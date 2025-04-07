@@ -1154,13 +1154,18 @@ module.exports = grammar({
 
         var: $ => token(/[_A-Z\xC0-\xD6\xD8-\xDE][_@a-zA-Z0-9\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF]*/),
 
-        integer: $ => token(
-            /\d{1,2}#[0-9a-zA-Z](_?[0-9a-zA-Z])*|\d(_?\d)*/,
-        ),
+        integer: $ => token(choice(
+          /\d(_?\d)*#[0-9a-zA-Z](_?[0-9a-zA-Z])*/,
+          /\d(_?\d)*/,
+        )),
 
-        float: $ => token(
+        float: $ => token(choice(
             /\d(_?\d)*\.\d(_?\d)*([eE][+-]?\d(_?\d)*)?/,
-        ),
+            // Note: we make the based float require a digit after the `.`,
+            // otherwise we get a bad interaction with optional trailing `.`
+            // on a form.
+            /\d(_?\d)*#[0-9a-zA-Z](_?[0-9a-zA-Z])*\.(_?[0-9a-zA-Z])+(#[eE][+-]?\d(_?\d)*)?/,
+        )),
 
         _sq_string: $ => token(seq(
             /"/,
