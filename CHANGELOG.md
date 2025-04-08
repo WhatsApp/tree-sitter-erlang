@@ -1,7 +1,12 @@
-0.13.0 (2025-02-0y)
+0.14.0 (2025-04-08)
+* OTP 28 features support
+  - based floating point literals [EEP-75](https://www.erlang.org/eeps/eep-0075)
+  - nominal types [EEP-69](https://github.com/erlang/eep/blob/master/eeps/eep-0069.md)
+  - zip generators [EEP-73](https://github.com/erlang/eep/blob/master/eeps/eep-0073.md)
+0.13.0 (2025-03-11)
 * Bump tree-sitter version to 0.22.4
 * Align operator precedence parsing with what the Erlang compiler does
-0.12.0 (2025-02-0y)
+0.12.0 (2025-02-07)
 * Parse escript shebangs as a top-level form
 * Allow a bare expression as a top-level form. This means the grammar
   can now handle rebar.config and similar files. By @williamthome
