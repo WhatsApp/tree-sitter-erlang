@@ -47,7 +47,8 @@
     }
   ],
   "devDependencies": {
-    "prebuildify": "^6.0.1"
+    "prebuildify": "^6.0.1",
+    "tar-fs": ">=2.1.3"
   },
   "files": [
     "grammar.js",
