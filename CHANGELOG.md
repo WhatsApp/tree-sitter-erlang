@@ -1,3 +1,6 @@
+0.15.0 (2025-10-07)
+* Fix deps vulnerabilities
+* Expose highlights query in rust (@wetneb)
 0.14.0 (2025-04-08)
 * OTP 28 features support
   - based floating point literals [EEP-75](https://www.erlang.org/eeps/eep-0075)
