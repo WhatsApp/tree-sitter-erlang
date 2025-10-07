@@ -1190,6 +1190,11 @@ module.exports = grammar({
             /([a-z\xDF-\xF6\xF8-\xFF][_@a-zA-Z0-9\xC0-\xD6\xD8-\xDE\xDF-\xF6\xF8-\xFF]*)|('([^'\\]|\\([^x\^]|[0-7]{1,3}|x[0-9a-fA-F]{2}|x\{[0-9a-fA-F]+\}|\^.))*')/,
         ),
 
-        comment: $ => token(/%[^\n]*/),
+        comment: $ => seq(
+          token(repeat1("%")),
+          $.comment_content,
+        ),
+
+        comment_content: $ => seq(/[^\n]*/, "\n"),
     }
 });

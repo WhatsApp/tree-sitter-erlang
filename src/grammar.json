@@ -7012,11 +7012,36 @@
       }
     },
     "comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "%[^\\n]*"
-      }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "REPEAT1",
+            "content": {
+              "type": "STRING",
+              "value": "%"
+            }
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment_content"
+        }
+      ]
+    },
+    "comment_content": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[^\\n]*"
+        },
+        {
+          "type": "STRING",
+          "value": "\n"
+        }
+      ]
     }
   },
   "extras": [
@@ -7082,9 +7107,7 @@
       "_macro_body_expr"
     ]
   ],
-  "precedences": [
-
-  ],
+  "precedences": [],
   "externals": [
     {
       "type": "SYMBOL",
