@@ -10,6 +10,7 @@ version = "0.15.0"
 
 build = "bindings/rust/build.rs"
 include = [
+  "LICENSE",
   "bindings/rust/*",
   "grammar.js",
   "queries/*",
