@@ -211,6 +211,10 @@ module.exports = grammar({
         [$._macro_def_replacement, $.replacement_guard_and, $.replacement_expr_guard],
         // Fun type vs regular function `fun()` vs `fun() -> ...`
         [$.fun_type, $.expr_args],
+        // `[X, Y || ...]` (multi-template comprehension) vs `[X, Y]` (list)
+        [$.list, $.list_comprehension],
+        // `#{K => V, K2 => V2 || ...}` vs `#{K => V, K2 => V2}`
+        [$.map_comprehension, $.map_expr],
         // Introduced by the exprs choice in the source_file
         [$._expr, $._map_expr_base, $._record_expr_base],
         [$._expr, $._map_expr_base],
@@ -695,7 +699,7 @@ module.exports = grammar({
 
         list_comprehension: $ => seq(
             '[',
-            field("expr", $._expr),
+            sepBy1(',', field("exprs", $._expr)),
             field("lc_exprs", $.lc_exprs),
             ']'
         ),
@@ -708,7 +712,7 @@ module.exports = grammar({
         map_comprehension: $ => seq(
             '#',
             '{',
-            field("expr", $.map_field),
+            sepBy1(',', field("exprs", $.map_field)),
             field("lc_exprs", $.lc_exprs),
             '}',
         ),

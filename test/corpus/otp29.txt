@@ -48,3 +48,61 @@ remote in type union
         (call
           (atom)
           (expr_args))))))
+
+================================================================================
+multi-template list comprehension
+================================================================================
+
+f() -> [X, Y || X <- Xs, Y <- Ys].
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (list_comprehension
+          (var)
+          (var)
+          (lc_exprs
+            (lc_or_zc_expr
+              (generator
+                (var)
+                (var)))
+            (lc_or_zc_expr
+              (generator
+                (var)
+                (var)))))))))
+
+================================================================================
+multi-template map comprehension
+================================================================================
+
+f() -> #{K1 => V1, K2 => V2 || K <- Ks, V <- Vs}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (map_comprehension
+          (map_field
+            (var)
+            (var))
+          (map_field
+            (var)
+            (var))
+          (lc_exprs
+            (lc_or_zc_expr
+              (generator
+                (var)
+                (var)))
+            (lc_or_zc_expr
+              (generator
+                (var)
+                (var)))))))))

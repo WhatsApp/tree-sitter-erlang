@@ -1889,8 +1889,8 @@
     "type": "list_comprehension",
     "named": true,
     "fields": {
-      "expr": {
-        "multiple": false,
+      "exprs": {
+        "multiple": true,
         "required": true,
         "types": [
           {
@@ -2025,8 +2025,8 @@
     "type": "map_comprehension",
     "named": true,
     "fields": {
-      "expr": {
-        "multiple": false,
+      "exprs": {
+        "multiple": true,
         "required": true,
         "types": [
           {
