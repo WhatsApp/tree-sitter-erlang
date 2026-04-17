@@ -106,3 +106,163 @@ f() -> #{K1 => V1, K2 => V2 || K <- Ks, V <- Vs}.
               (generator
                 (var)
                 (var)))))))))
+
+================================================================================
+qualified record creation
+================================================================================
+
+f() -> #mod:name{a = 1}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (qualified_record_expr
+          (qualified_record_name
+            (module
+              (atom))
+            (atom))
+          (record_field
+            (atom)
+            (field_expr
+              (integer))))))))
+
+================================================================================
+qualified record update
+================================================================================
+
+f(X) -> X#mod:name{a = 1, b = 3}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var))
+      (clause_body
+        (qualified_record_update_expr
+          (var)
+          (qualified_record_name
+            (module
+              (atom))
+            (atom))
+          (record_field
+            (atom)
+            (field_expr
+              (integer)))
+          (record_field
+            (atom)
+            (field_expr
+              (integer))))))))
+
+================================================================================
+qualified record field access
+================================================================================
+
+f(X) -> X#mod:name.field.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var))
+      (clause_body
+        (qualified_record_field_expr
+          (var)
+          (qualified_record_name
+            (module
+              (atom))
+            (atom))
+          (record_field_name
+            (atom)))))))
+
+================================================================================
+anonymous record creation
+================================================================================
+
+f() -> #_{a = 1, b = 2}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args)
+      (clause_body
+        (anon_record_expr
+          (record_field
+            (atom)
+            (field_expr
+              (integer)))
+          (record_field
+            (atom)
+            (field_expr
+              (integer))))))))
+
+================================================================================
+anonymous record update
+================================================================================
+
+f(X) -> X#_{a = 1}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var))
+      (clause_body
+        (anon_record_update_expr
+          (var)
+          (record_field
+            (atom)
+            (field_expr
+              (integer))))))))
+
+================================================================================
+anonymous record field access
+================================================================================
+
+f(X) -> X#_.field.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var))
+      (clause_body
+        (anon_record_field_expr
+          (var)
+          (record_field_name
+            (atom)))))))
+
+================================================================================
+native record declaration
+================================================================================
+
+-record #name{a, b}.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (record_decl
+    (atom)
+    (record_field
+      (atom))
+    (record_field
+      (atom))))

@@ -455,15 +455,37 @@ module.exports = grammar({
         ),
         type_name: $ => seq(field("name", $._name), field("args", $.var_args)),
 
-        record_decl: $ => seq(
-            '-',
-            atom_const('record'),
-            '(',
-            field("name", $._name),
-            optional(','),
-            $._record_tuple,
-            ')',
-            '.',
+        record_decl: $ => choice(
+            seq(
+                '-',
+                atom_const('record'),
+                '(',
+                field("name", $._name),
+                optional(','),
+                $._record_tuple,
+                ')',
+                '.',
+            ),
+            // Native record declaration: -record #Name{fields}.
+            seq(
+                '-',
+                atom_const('record'),
+                '#',
+                field("name", $._name),
+                $._record_tuple,
+                '.',
+            ),
+            // Native record declaration with parens: -record(#Name{fields}).
+            seq(
+                '-',
+                atom_const('record'),
+                '(',
+                '#',
+                field("name", $._name),
+                $._record_tuple,
+                ')',
+                '.',
+            ),
         ),
 
         spec: $ => seq('-', atom_const('spec'), $._spec_def, '.'),
@@ -791,6 +813,12 @@ module.exports = grammar({
             $.record_field_expr,
             $.record_update_expr,
             $.record_expr,
+            $.qualified_record_expr,
+            $.qualified_record_field_expr,
+            $.qualified_record_update_expr,
+            $.anon_record_expr,
+            $.anon_record_field_expr,
+            $.anon_record_update_expr,
         ),
 
         record_index_expr: $ => seq(
@@ -818,6 +846,37 @@ module.exports = grammar({
         record_name: $ => seq('#', field("name", $._name)),
 
         record_field_name: $ => seq('.', field("name", $._name)),
+
+        // Native record support (OTP 29)
+        qualified_record_name: $ => seq('#', field("module", $.module), field("name", $._name)),
+
+        qualified_record_expr: $ => seq(field("name", $.qualified_record_name), $._record_tuple),
+
+        qualified_record_update_expr: $ => prec.right(seq(
+            field("expr", $._record_expr_base),
+            field("name", $.qualified_record_name),
+            $._record_tuple,
+        )),
+
+        qualified_record_field_expr: $ => prec.right(seq(
+            field("expr", $._record_expr_base),
+            field("name", $.qualified_record_name),
+            field("field", $.record_field_name),
+        )),
+
+        anon_record_expr: $ => seq(token('#_'), $._record_tuple),
+
+        anon_record_update_expr: $ => prec.right(seq(
+            field("expr", $._record_expr_base),
+            token('#_'),
+            $._record_tuple,
+        )),
+
+        anon_record_field_expr: $ => prec.right(seq(
+            field("expr", $._record_expr_base),
+            token('#_'),
+            field("field", $.record_field_name),
+        )),
 
         _record_expr_base: $ => choice(
             $._expr_max,
@@ -977,6 +1036,8 @@ module.exports = grammar({
             $.map_expr,
             $.record_index_expr,
             $.record_expr,
+            $.qualified_record_expr,
+            $.anon_record_expr,
             $._expr_max,
         ),
 

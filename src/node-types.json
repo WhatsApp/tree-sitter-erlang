@@ -58,11 +58,19 @@
         "named": true
       },
       {
+        "type": "anon_record_expr",
+        "named": true
+      },
+      {
         "type": "binary_op_expr",
         "named": true
       },
       {
         "type": "map_expr",
+        "named": true
+      },
+      {
+        "type": "qualified_record_expr",
         "named": true
       },
       {
@@ -174,6 +182,18 @@
         "named": true
       },
       {
+        "type": "anon_record_expr",
+        "named": true
+      },
+      {
+        "type": "anon_record_field_expr",
+        "named": true
+      },
+      {
+        "type": "anon_record_update_expr",
+        "named": true
+      },
+      {
         "type": "binary_op_expr",
         "named": true
       },
@@ -207,6 +227,18 @@
       },
       {
         "type": "pipe",
+        "named": true
+      },
+      {
+        "type": "qualified_record_expr",
+        "named": true
+      },
+      {
+        "type": "qualified_record_field_expr",
+        "named": true
+      },
+      {
+        "type": "qualified_record_update_expr",
         "named": true
       },
       {
@@ -628,6 +660,30 @@
         "named": true
       },
       {
+        "type": "anon_record_expr",
+        "named": true
+      },
+      {
+        "type": "anon_record_field_expr",
+        "named": true
+      },
+      {
+        "type": "anon_record_update_expr",
+        "named": true
+      },
+      {
+        "type": "qualified_record_expr",
+        "named": true
+      },
+      {
+        "type": "qualified_record_field_expr",
+        "named": true
+      },
+      {
+        "type": "qualified_record_update_expr",
+        "named": true
+      },
+      {
         "type": "record_expr",
         "named": true
       },
@@ -699,6 +755,74 @@
         "types": [
           {
             "type": "var",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "anon_record_expr",
+    "named": true,
+    "fields": {
+      "fields": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "record_field",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "anon_record_field_expr",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_record_expr_base",
+            "named": true
+          }
+        ]
+      },
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "record_field_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "anon_record_update_expr",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_record_expr_base",
+            "named": true
+          }
+        ]
+      },
+      "fields": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "record_field",
             "named": true
           }
         ]
@@ -2502,6 +2626,130 @@
     }
   },
   {
+    "type": "qualified_record_expr",
+    "named": true,
+    "fields": {
+      "fields": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "record_field",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "qualified_record_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "qualified_record_field_expr",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_record_expr_base",
+            "named": true
+          }
+        ]
+      },
+      "field": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "record_field_name",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "qualified_record_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "qualified_record_name",
+    "named": true,
+    "fields": {
+      "module": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "module",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "qualified_record_update_expr",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_record_expr_base",
+            "named": true
+          }
+        ]
+      },
+      "fields": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "record_field",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "qualified_record_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "range_type",
     "named": true,
     "fields": {
@@ -3353,6 +3601,10 @@
   },
   {
     "type": "#",
+    "named": false
+  },
+  {
+    "type": "#_",
     "named": false
   },
   {
