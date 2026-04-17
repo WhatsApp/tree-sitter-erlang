@@ -53,7 +53,10 @@ const PREC = {
     BANG: 13, // `!` in Expr
 
     // For remote vs binary :
-    REMOTE: 1,
+    // `:` in remote calls binds tighter than all binary operators,
+    // so REMOTE must be above PREFIX_OP (21) to prevent e.g.
+    // `a | b:c()` being misparsed as `(a | b):c()`.
+    REMOTE: 22,
     BIT_EXPR: 2,
     CALL: 80,
 
@@ -635,8 +638,8 @@ module.exports = grammar({
             $.maybe_expr,
         ),
 
-        remote: $ => prec.right(PREC.REMOTE, seq(field("module", $.remote_module), field("fun", $._expr_max))),
-        remote_module: $ => prec(PREC.REMOTE, seq(field("module", $._expr_max), ':')),
+        remote: $ => prec.right(PREC.REMOTE, seq(field("module", $.remote_module), field("fun", $._expr))),
+        remote_module: $ => prec(PREC.REMOTE, seq(field("module", $._expr), ':')),
 
         paren_expr: $ => seq('(', field("expr", $._expr), ')'),
         block_expr: $ => seq('begin', sepBy1(',', field("exprs", $._expr)), 'end'),

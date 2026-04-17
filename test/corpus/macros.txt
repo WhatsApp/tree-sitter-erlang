@@ -314,13 +314,13 @@ lookup(Prefix, Suffix) ->
         (var))
       (clause_body
         (case_expr
-          (call
-            (remote
-              (remote_module
-                (atom))
+          (remote
+            (remote_module
               (atom))
-            (expr_args
-              (var)))
+            (call
+              (atom)
+              (expr_args
+                (var))))
           (cr_clause
             (list
               (var))

@@ -2806,7 +2806,7 @@
         "required": true,
         "types": [
           {
-            "type": "_expr_max",
+            "type": "_expr",
             "named": true
           }
         ]
@@ -2832,7 +2832,7 @@
         "required": true,
         "types": [
           {
-            "type": "_expr_max",
+            "type": "_expr",
             "named": true
           }
         ]

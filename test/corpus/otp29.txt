@@ -1,0 +1,50 @@
+================================================================================
+broadened remote expression with parens
+================================================================================
+
+f(M, F) -> (M):(F)(1, 2).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var)
+        (var))
+      (clause_body
+        (remote
+          (remote_module
+            (paren_expr
+              (var)))
+          (call
+            (paren_expr
+              (var))
+            (expr_args
+              (integer)
+              (integer))))))))
+
+================================================================================
+remote in type union
+================================================================================
+
+-type t() :: foo() | mod:bar().
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (type_alias
+    (type_name
+      (atom)
+      (var_args))
+    (pipe
+      (call
+        (atom)
+        (expr_args))
+      (remote
+        (remote_module
+          (atom))
+        (call
+          (atom)
+          (expr_args))))))

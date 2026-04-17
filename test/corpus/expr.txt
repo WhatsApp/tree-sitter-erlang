@@ -441,12 +441,12 @@ f() ->
           (paren_expr
             (atom))
           (expr_args))
-        (call
-          (remote
-            (remote_module
-              (atom))
+        (remote
+          (remote_module
             (atom))
-          (expr_args))
+          (call
+            (atom)
+            (expr_args)))
         (call
           (paren_expr
             (remote
@@ -454,14 +454,14 @@ f() ->
                 (atom))
               (atom)))
           (expr_args))
-        (call
-          (remote
-            (remote_module
-              (paren_expr
-                (var)))
+        (remote
+          (remote_module
             (paren_expr
               (var)))
-          (expr_args))))))
+          (call
+            (paren_expr
+              (var))
+            (expr_args)))))))
 
 ================================================================================
 variable assignment
@@ -1693,57 +1693,57 @@ f() ->
         (block_expr
           (match_expr
             (var)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args
-                (integer)
-                (integer))))
+              (call
+                (atom)
+                (expr_args
+                  (integer)
+                  (integer)))))
           (match_expr
             (var)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args
-                (map_comprehension
-                  (map_field
-                    (var)
-                    (var))
-                  (lc_exprs
-                    (lc_or_zc_expr
-                      (generator
-                        (var)
-                        (var)))))
-                (atom))))
+              (call
+                (atom)
+                (expr_args
+                  (map_comprehension
+                    (map_field
+                      (var)
+                      (var))
+                    (lc_exprs
+                      (lc_or_zc_expr
+                        (generator
+                          (var)
+                          (var)))))
+                  (atom)))))
           (match_expr
             (var)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args
-                (map_comprehension
-                  (map_field
-                    (var)
-                    (var))
-                  (lc_exprs
-                    (lc_or_zc_expr
-                      (generator
-                        (var)
-                        (call
+              (call
+                (atom)
+                (expr_args
+                  (map_comprehension
+                    (map_field
+                      (var)
+                      (var))
+                    (lc_exprs
+                      (lc_or_zc_expr
+                        (generator
+                          (var)
                           (remote
                             (remote_module
                               (atom))
-                            (atom))
-                          (expr_args
-                            (integer)
-                            (integer)))))))
-                (atom))))
+                            (call
+                              (atom)
+                              (expr_args
+                                (integer)
+                                (integer))))))))
+                  (atom)))))
           (list_comprehension
             (binary_op_expr
               (binary_op_expr
@@ -1787,56 +1787,56 @@ f() ->
         (block_expr
           (match_expr
             (var)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args
-                (integer)
-                (integer))))
+              (call
+                (atom)
+                (expr_args
+                  (integer)
+                  (integer)))))
           (match_expr
             (var)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args
-                (map_comprehension
-                  (map_field
-                    (var)
-                    (binary_op_expr
+              (call
+                (atom)
+                (expr_args
+                  (map_comprehension
+                    (map_field
                       (var)
-                      (integer)))
-                  (lc_exprs
-                    (lc_or_zc_expr
-                      (generator
+                      (binary_op_expr
                         (var)
-                        (var)))))
-                (atom))))
+                        (integer)))
+                    (lc_exprs
+                      (lc_or_zc_expr
+                        (generator
+                          (var)
+                          (var)))))
+                  (atom)))))
           (match_expr
             (var)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args
-                (map_comprehension
-                  (map_field
-                    (binary_op_expr
-                      (var)
-                      (integer))
-                    (binary_op_expr
-                      (var)
-                      (integer)))
-                  (lc_exprs
-                    (lc_or_zc_expr
-                      (generator
+              (call
+                (atom)
+                (expr_args
+                  (map_comprehension
+                    (map_field
+                      (binary_op_expr
                         (var)
-                        (var)))))
-                (atom))))
+                        (integer))
+                      (binary_op_expr
+                        (var)
+                        (integer)))
+                    (lc_exprs
+                      (lc_or_zc_expr
+                        (generator
+                          (var)
+                          (var)))))
+                  (atom)))))
           (list_comprehension
             (tuple
               (var)
@@ -2106,12 +2106,12 @@ fn(X) ->
           (comment)
           (tuple
             (float)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args)))
+              (call
+                (atom)
+                (expr_args))))
           (comment)
           (tuple
             (float)
@@ -2181,12 +2181,12 @@ fn(X) ->
           (comment)
           (tuple
             (float)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args)))
+              (call
+                (atom)
+                (expr_args))))
           (comment))))))
 
 ================================================================================
@@ -2214,28 +2214,28 @@ fn() ->
             (float))
           (tuple
             (float)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args)))
+              (call
+                (atom)
+                (expr_args))))
           (tuple
             (float)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args)))
+              (call
+                (atom)
+                (expr_args))))
           (tuple
             (float)
-            (call
-              (remote
-                (remote_module
-                  (atom))
+            (remote
+              (remote_module
                 (atom))
-              (expr_args)))
+              (call
+                (atom)
+                (expr_args))))
           (tuple
             (float)
             (float)))))))

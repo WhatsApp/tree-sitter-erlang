@@ -3076,7 +3076,7 @@
     },
     "remote": {
       "type": "PREC_RIGHT",
-      "value": 1,
+      "value": 22,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3093,7 +3093,7 @@
             "name": "fun",
             "content": {
               "type": "SYMBOL",
-              "name": "_expr_max"
+              "name": "_expr"
             }
           }
         ]
@@ -3101,7 +3101,7 @@
     },
     "remote_module": {
       "type": "PREC",
-      "value": 1,
+      "value": 22,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3110,7 +3110,7 @@
             "name": "module",
             "content": {
               "type": "SYMBOL",
-              "name": "_expr_max"
+              "name": "_expr"
             }
           },
           {

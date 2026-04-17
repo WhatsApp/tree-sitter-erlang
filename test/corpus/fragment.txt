@@ -7,14 +7,14 @@ maps:get(hello, World).
 --------------------------------------------------------------------------------
 
 (source_file
-  (call
-    (remote
-      (remote_module
-        (atom))
+  (remote
+    (remote_module
       (atom))
-    (expr_args
+    (call
       (atom)
-      (var))))
+      (expr_args
+        (atom)
+        (var)))))
 
 ================================================================================
 simple expression without ending dot
@@ -25,14 +25,14 @@ maps:get(hello, World)
 --------------------------------------------------------------------------------
 
 (source_file
-  (call
-    (remote
-      (remote_module
-        (atom))
+  (remote
+    (remote_module
       (atom))
-    (expr_args
+    (call
       (atom)
-      (var))))
+      (expr_args
+        (atom)
+        (var)))))
 
 ================================================================================
 rebar.config
