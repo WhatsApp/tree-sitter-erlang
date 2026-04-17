@@ -238,6 +238,7 @@ module.exports = grammar({
             $.import_attribute,
             $.import_record_attribute,
             $.export_type_attribute,
+            $.export_record_attribute,
             $.optional_callbacks_attribute,
             $.compile_options_attribute,
             $.feature_attribute,
@@ -374,6 +375,10 @@ module.exports = grammar({
             ')',
             '.'
         ),
+
+        export_record_attribute: $ => seq(
+            '-', atom_const('export_record'), '(',
+            '[', sepBy(optional(','), field("records", $.atom)), ']', ')', '.'),
 
         compile_options_attribute: $ => seq(
             '-',

@@ -410,6 +410,10 @@
         "named": true
       },
       {
+        "type": "export_record_attribute",
+        "named": true
+      },
+      {
         "type": "export_type_attribute",
         "named": true
       },
@@ -1479,6 +1483,22 @@
         "types": [
           {
             "type": "fa",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "export_record_attribute",
+    "named": true,
+    "fields": {
+      "records": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "atom",
             "named": true
           }
         ]
@@ -3919,6 +3939,10 @@
   },
   {
     "type": "export",
+    "named": false
+  },
+  {
+    "type": "export_record",
     "named": false
   },
   {
