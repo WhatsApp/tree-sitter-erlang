@@ -430,6 +430,10 @@
         "named": true
       },
       {
+        "type": "import_record_attribute",
+        "named": true
+      },
+      {
         "type": "module_attribute",
         "named": true
       },
@@ -1926,6 +1930,48 @@
       "module": {
         "multiple": false,
         "required": true,
+        "types": [
+          {
+            "type": "_name",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "import_record_attribute",
+    "named": true,
+    "fields": {
+      "module": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "_name",
+            "named": true
+          }
+        ]
+      },
+      "records": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "import_record_names",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "import_record_names",
+    "named": true,
+    "fields": {
+      "names": {
+        "multiple": true,
+        "required": false,
         "types": [
           {
             "type": "_name",
@@ -3909,6 +3955,10 @@
   },
   {
     "type": "import",
+    "named": false
+  },
+  {
+    "type": "import_record",
     "named": false
   },
   {

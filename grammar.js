@@ -236,6 +236,7 @@ module.exports = grammar({
             $.behaviour_attribute,
             $.export_attribute,
             $.import_attribute,
+            $.import_record_attribute,
             $.export_type_attribute,
             $.optional_callbacks_attribute,
             $.compile_options_attribute,
@@ -345,6 +346,14 @@ module.exports = grammar({
             '-', atom_const('import'), '(',
             field("module", $._name), ',',
             '[', sepBy(optional(','), field("funs", $.fa)), ']', ')', '.'),
+
+        import_record_attribute: $ => seq(
+            '-', atom_const('import_record'), '(',
+            field("module", $._name), ',',
+            field("records", $.import_record_names), ')', '.'),
+
+        import_record_names: $ => seq(
+            '[', sepBy(optional(','), field("names", $._name)), ']'),
 
         optional_callbacks_attribute: $ => seq(
             '-', atom_const('optional_callbacks'), '(', '[',
