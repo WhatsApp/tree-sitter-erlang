@@ -1,3 +1,8 @@
+0.16.0 (2026-04-21)
+* OTP 29 features support
+  - multi-valued comprehensions [EEP-78](https://www.erlang.org/eeps/eep-0078)
+  - native records [EEP-79](https://www.erlang.org/eeps/eep-0079)
+  - make function application left associative
 0.15.0 (2025-10-07)
 * Fix deps vulnerabilities
 * Expose highlights query in rust (@wetneb)
