@@ -26,9 +26,9 @@ debug: gen
 .PHONY: gen
 gen:
 	$(TREE_SITTER) generate
-	ruby -e 'ARGV.each{|f| File.write(f, "// @"+"generated\n\n"+File.read(f))}' src/parser.c src/tree_sitter/parser.h src/tree_sitter/alloc.h src/tree_sitter/array.h
-	ruby -rjson -e 'ARGV.each{|f| File.write(f, JSON.pretty_generate(JSON.parse(File.read(f)).tap{|j| j["@"+"generated"] = true}))}' src/grammar.json
-	ruby -rjson -e 'ARGV.each{|f| File.write(f, JSON.pretty_generate(JSON.parse(File.read(f)).tap{|j| j << {"@"+"generated" => true}}))}' src/node-types.json
+	python3 -c 'import sys; [open(f,"w").write(c) for f in sys.argv[1:] for c in ["// @"+"generated\n\n"+open(f).read()]]' src/parser.c src/tree_sitter/parser.h src/tree_sitter/alloc.h src/tree_sitter/array.h
+	python3 -c 'import sys,json; [open(f,"w").write(c) for f in sys.argv[1:] for c in [json.dumps({**json.load(open(f)),"@"+"generated":True},indent=2)+"\n"]]' src/grammar.json
+	python3 -c 'import sys,json; [open(f,"w").write(c) for f in sys.argv[1:] for c in [json.dumps(json.load(open(f))+[{"@"+"generated":True}],indent=2)+"\n"]]' src/node-types.json
 
 .PHONY: deps
 deps:
