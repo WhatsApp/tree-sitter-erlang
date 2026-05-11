@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "erlang",
   "word": "atom",
   "rules": {
@@ -2697,8 +2698,17 @@
             }
           },
           {
-            "type": "STRING",
-            "value": "::"
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "::"
+              },
+              {
+                "type": "STRING",
+                "value": ":>"
+              }
+            ]
           }
         ]
       }
@@ -7684,9 +7694,7 @@
       "_macro_body_expr"
     ]
   ],
-  "precedences": [
-
-  ],
+  "precedences": [],
   "externals": [
     {
       "type": "SYMBOL",

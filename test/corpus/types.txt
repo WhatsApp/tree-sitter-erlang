@@ -206,3 +206,24 @@ nominal type
     (call
       (atom)
       (expr_args))))
+
+================================================================================
+Unchecked cast operator :>
+================================================================================
+
+-define(unchecked_cast(Expr, Type), (Expr :> Type)).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (pp_define
+    (macro_lhs
+      (atom)
+      (var_args
+        (var)
+        (var)))
+    (paren_expr
+      (ann_type
+        (ann_var
+          (var))
+        (var)))))

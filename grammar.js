@@ -538,7 +538,7 @@ module.exports = grammar({
 
         ann_type: $ => prec(PREC.DCOLON, seq(field("var", $.ann_var), field("ty", $._expr))),
 
-        ann_var: $ => prec(PREC.DCOLON, seq(field("var", $.var), '::')),
+        ann_var: $ => prec(PREC.DCOLON, seq(field("var", $.var), choice('::', ':>'))),
 
         // Both union type and list tail
         pipe: $ => prec.right(PREC.PIPE, seq(field("lhs", $._expr), '|', field("rhs", $._expr))),

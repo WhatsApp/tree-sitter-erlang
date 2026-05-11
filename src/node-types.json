@@ -2586,14 +2586,12 @@
   {
     "type": "pp_else",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "pp_endif",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "pp_if",
@@ -3246,12 +3244,12 @@
   {
     "type": "replacement_parens",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "exprs": {
         "multiple": true,
@@ -3386,8 +3384,7 @@
   {
     "type": "string",
     "named": true,
-    "fields": {
-    }
+    "fields": {}
   },
   {
     "type": "try_after",
@@ -3739,6 +3736,10 @@
   },
   {
     "type": ":=",
+    "named": false
+  },
+  {
+    "type": ":>",
     "named": false
   },
   {
