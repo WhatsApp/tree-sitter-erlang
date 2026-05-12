@@ -263,14 +263,14 @@ module.exports = grammar({
             'ssr', ':',
             field("lhs", $._expr),
             field("rhs", optional($.ssr_replacement)),
-            field("when", optional($.ssr_when)),
+            field("where", optional($.ssr_where)),
             '.'
         )),
         ssr_replacement: $ => seq(
             '==>>',
             field("expr", $._expr),
         ),
-        ssr_when: $ => seq('when', field("guard", $.guard)),
+        ssr_where: $ => seq('where', field("guard", $.guard)),
 
         _preprocessor_directive: $ => choice(
             $.pp_include,

@@ -49,7 +49,7 @@ with where clause
 ================================================================================
 
 ssr: _@X = _@Y ==>> _@X = 4
-   when is_atom(_@Y).
+   where is_atom(_@Y).
 
 --------------------------------------------------------------------------------
 
@@ -62,7 +62,35 @@ ssr: _@X = _@Y ==>> _@X = 4
       (match_expr
         (var)
         (integer)))
-    (ssr_when
+    (ssr_where
+      (guard
+        (guard_clause
+          (call
+            (atom)
+            (expr_args
+              (var))))))))
+================================================================================
+with when and where clause
+This is expected to not parse, until we define the ssr RHS as
+_macro_def_replacement
+================================================================================
+
+ssr: _@X = _@Y when is_atom(_@Y)
+   where is_atom(_@Y).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (ssr_definition
+    (match_expr
+      (var)
+      (ERROR
+        (var))
+        (call
+          (atom)
+          (expr_args
+            (var))))
+    (ssr_where
       (guard
         (guard_clause
           (call

@@ -183,13 +183,13 @@
           },
           {
             "type": "FIELD",
-            "name": "when",
+            "name": "where",
             "content": {
               "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "ssr_when"
+                  "name": "ssr_where"
                 },
                 {
                   "type": "BLANK"
@@ -221,12 +221,12 @@
         }
       ]
     },
-    "ssr_when": {
+    "ssr_where": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "when"
+          "value": "where"
         },
         {
           "type": "FIELD",

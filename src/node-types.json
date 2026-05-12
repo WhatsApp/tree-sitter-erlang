@@ -3336,12 +3336,12 @@
           }
         ]
       },
-      "when": {
+      "where": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "ssr_when",
+            "type": "ssr_where",
             "named": true
           }
         ]
@@ -3365,7 +3365,7 @@
     }
   },
   {
-    "type": "ssr_when",
+    "type": "ssr_where",
     "named": true,
     "fields": {
       "guard": {
@@ -4079,6 +4079,10 @@
   },
   {
     "type": "when",
+    "named": false
+  },
+  {
+    "type": "where",
     "named": false
   },
   {
