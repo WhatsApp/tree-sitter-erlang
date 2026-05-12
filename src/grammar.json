@@ -1,5 +1,4 @@
 {
-  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "erlang",
   "word": "atom",
   "rules": {
@@ -3127,7 +3126,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC_RIGHT",
           "value": 14,
           "content": {
             "type": "SEQ",
@@ -3156,7 +3155,7 @@
           }
         },
         {
-          "type": "PREC_LEFT",
+          "type": "PREC_RIGHT",
           "value": 15,
           "content": {
             "type": "SEQ",

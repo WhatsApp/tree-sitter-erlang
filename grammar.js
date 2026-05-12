@@ -37,8 +37,8 @@ const PREC = {
     // + - bor bxor bsl bsr or xor  | ADD_OP    | Left-associative
     // ++ --                        | LIST_OP   | Right-associative
     // == /= =< < >= > =:= =/=      | COMP_OP   | Non-associative
-    // andalso                      | ANDALSO   | Left-associative
-    // orelse                       | ORELSE    | Left-associative
+    // andalso                      | ANDALSO   | Right-associative (OTP parses as left, then re-associates)
+    // orelse                       | ORELSE    | Right-associative (OTP parses as left, then re-associates)
     // catch                        |
     // = !                          | EQ, BANG  | Right-associative
     // ?=                           | Non-associative
@@ -616,12 +616,12 @@ module.exports = grammar({
                 '!',
                 field("rhs", $._expr),
             )),
-            prec.left(PREC.ORELSE, seq(
+            prec.right(PREC.ORELSE, seq(
                 field("lhs", $._expr),
                 'orelse',
                 field("rhs", $._expr),
             )),
-            prec.left(PREC.ANDALSO, seq(
+            prec.right(PREC.ANDALSO, seq(
                 field("lhs", $._expr),
                 'andalso',
                 field("rhs", $._expr),

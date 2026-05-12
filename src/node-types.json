@@ -3249,7 +3249,6 @@
   {
     "type": "source_file",
     "named": true,
-    "root": true,
     "fields": {
       "exprs": {
         "multiple": true,

@@ -1965,6 +1965,75 @@ fn(A, B) -> A =:= -1 orelse B =:= -1.
               (integer))))))))
 
 ================================================================================
+Operator precedence, andalso right-associativity
+================================================================================
+
+fn(A, B, C) -> A andalso B andalso C.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var)
+        (var)
+        (var))
+      (clause_body
+        (binary_op_expr
+          (var)
+          (binary_op_expr
+            (var)
+            (var)))))))
+
+================================================================================
+Operator precedence, orelse right-associativity
+================================================================================
+
+fn(A, B, C) -> A orelse B orelse C.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var)
+        (var)
+        (var))
+      (clause_body
+        (binary_op_expr
+          (var)
+          (binary_op_expr
+            (var)
+            (var)))))))
+
+================================================================================
+Operator precedence, andalso vs orelse (andalso binds tighter)
+================================================================================
+
+fn(A, B, C) -> A orelse B andalso C.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (var)
+        (var)
+        (var))
+      (clause_body
+        (binary_op_expr
+          (var)
+          (binary_op_expr
+            (var)
+            (var)))))))
+
+================================================================================
 Operator precedence, and vs >
 ================================================================================
 
