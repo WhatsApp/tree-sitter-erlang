@@ -19,7 +19,8 @@ const PREC = {
     CATCH: 0,
     DCOLON: 1, // `::`
     PIPE: 2, // `|`
-    EQ: 3, // `=` in Expr
+    COND_MATCH: 3, // `?=` in maybe expr. Should have lowest priority https://www.erlang.org/eeps/eep-0049#operator-priority
+    EQ: 4, // `=` in Expr
 
     DOTDOT: 6, // `..` in Type
     DARROW: 7, // `=>` in Type, Expr
@@ -59,8 +60,6 @@ const PREC = {
     REMOTE: 22,
     BIT_EXPR: 2,
     CALL: 80,
-
-    COND_MATCH: 81, // `?=` in maybe expr. Should has lowest priority https://www.erlang.org/eeps/eep-0049#operator-priority
 
     // In macro def, prefer expressions, if type and expr would parse
     DYN_CR_CLAUSES: 1,

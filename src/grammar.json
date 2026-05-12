@@ -3033,7 +3033,7 @@
     },
     "match_expr": {
       "type": "PREC_RIGHT",
-      "value": 3,
+      "value": 4,
       "content": {
         "type": "SEQ",
         "members": [
@@ -3062,7 +3062,7 @@
     },
     "cond_match_expr": {
       "type": "PREC_RIGHT",
-      "value": 81,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5846,7 +5846,7 @@
     },
     "match_catch_pat": {
       "type": "PREC_RIGHT",
-      "value": 3,
+      "value": 4,
       "content": {
         "type": "SEQ",
         "members": [
