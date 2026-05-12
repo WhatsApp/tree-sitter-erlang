@@ -16,11 +16,11 @@
 
 // Higher value == higher precedence
 const PREC = {
-    CATCH: 0,
     DCOLON: 1, // `::`
     PIPE: 2, // `|`
-    COND_MATCH: 3, // `?=` in maybe expr. Should have lowest priority https://www.erlang.org/eeps/eep-0049#operator-priority
-    EQ: 4, // `=` in Expr
+    CATCH: 3, // `catch` must be above PIPE so [catch X | Y] parses as [(catch X) | Y]
+    COND_MATCH: 4, // `?=` in maybe expr. Should have lowest priority https://www.erlang.org/eeps/eep-0049#operator-priority
+    EQ: 5, // `=` in Expr
 
     DOTDOT: 6, // `..` in Type
     DARROW: 7, // `=>` in Type, Expr
