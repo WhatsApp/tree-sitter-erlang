@@ -1,3 +1,10 @@
+0.17.0 (2026-05-13)
+- Convert Makefile post-processing from Ruby to Python3 and relax rustfmt check
+- Add :> (unchecked cast) operator to tree-sitter grammar
+- Fix precedence of andalso / orelse
+- Fix ?= precedence
+- Fix catch precedence for list cons
+- Use where to introduce SSR conditions
 0.16.0 (2026-04-21)
 * OTP 29 features support
   - multi-valued comprehensions [EEP-78](https://www.erlang.org/eeps/eep-0078)
