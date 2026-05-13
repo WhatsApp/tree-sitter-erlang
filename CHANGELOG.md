@@ -5,11 +5,13 @@
 - Fix ?= precedence
 - Fix catch precedence for list cons
 - Use where to introduce SSR conditions
+
 0.16.0 (2026-04-21)
 * OTP 29 features support
   - multi-valued comprehensions [EEP-78](https://www.erlang.org/eeps/eep-0078)
   - native records [EEP-79](https://www.erlang.org/eeps/eep-0079)
   - make function application left associative
+
 0.15.0 (2025-10-07)
 * Fix deps vulnerabilities
 * Expose highlights query in rust (@wetneb)
@@ -18,9 +20,11 @@
   - based floating point literals [EEP-75](https://www.erlang.org/eeps/eep-0075)
   - nominal types [EEP-69](https://github.com/erlang/eep/blob/master/eeps/eep-0069.md)
   - zip generators [EEP-73](https://github.com/erlang/eep/blob/master/eeps/eep-0073.md)
+
 0.13.0 (2025-03-11)
 * Bump tree-sitter version to 0.22.4
 * Align operator precedence parsing with what the Erlang compiler does
+
 0.12.0 (2025-02-07)
 * Parse escript shebangs as a top-level form
 * Allow a bare expression as a top-level form. This means the grammar
