@@ -70,6 +70,10 @@
         "named": true
       },
       {
+        "type": "match_expr",
+        "named": true
+      },
+      {
         "type": "qualified_record_expr",
         "named": true
       },
@@ -2340,6 +2344,10 @@
         "required": true,
         "types": [
           {
+            "type": "_catch_pat",
+            "named": true
+          },
+          {
             "type": "_expr",
             "named": true
           }
@@ -2349,6 +2357,10 @@
         "multiple": false,
         "required": true,
         "types": [
+          {
+            "type": "_catch_pat",
+            "named": true
+          },
           {
             "type": "_expr",
             "named": true

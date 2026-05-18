@@ -98,7 +98,8 @@ f(X) ->
     Pattern -> ok;
     error:Pattern -> ok;
     throw:Pattern:Stack -> ok;
-    exit:Complex + Pattern:Stack -> ok
+    exit:Complex + Pattern:Stack -> ok;
+    throw:E = {bad, _}:Stack -> ok
   after
     ok
   end,
@@ -152,6 +153,18 @@ f(X) ->
             (binary_op_expr
               (var)
               (var))
+            (try_stack
+              (var))
+            (clause_body
+              (atom)))
+          (catch_clause
+            (try_class
+              (atom))
+            (match_expr
+              (var)
+              (tuple
+                (atom)
+                (var)))
             (try_stack
               (var))
             (clause_body

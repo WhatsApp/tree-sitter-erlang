@@ -1044,7 +1044,7 @@ module.exports = grammar({
 
         _catch_pat: $ => choice(
             alias($.binary_op_catch_pat, $.binary_op_expr),
-            alias($.match_catch_pat, $.binary_op_expr),
+            alias($.match_catch_pat, $.match_expr),
             $.unary_op_expr,
             $.map_expr,
             $.record_index_expr,

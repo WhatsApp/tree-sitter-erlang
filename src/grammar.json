@@ -5812,7 +5812,7 @@
             "name": "match_catch_pat"
           },
           "named": true,
-          "value": "binary_op_expr"
+          "value": "match_expr"
         },
         {
           "type": "SYMBOL",
