@@ -1,3 +1,6 @@
+0.18.0 (2026-05-19)
+- alias match_catch_pat to match_expr
+
 0.17.0 (2026-05-13)
 - Convert Makefile post-processing from Ruby to Python3 and relax rustfmt check
 - Add :> (unchecked cast) operator to tree-sitter grammar
