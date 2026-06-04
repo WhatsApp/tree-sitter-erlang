@@ -207,7 +207,7 @@ module.exports = grammar({
         [$._function_or_macro_clause, $._cr_clause_or_macro, $._macro_body_expr],
         // This is intentionally ambiguous to simplify the produced tree
         [$._macro_def_replacement, $.replacement_guard_or],
-        [$._macro_def_replacement, $.replacement_guard_and, $.replacement_expr_guard],
+        [$._macro_def_replacement, $.replacement_guard_and],
         // Fun type vs regular function `fun()` vs `fun() -> ...`
         [$.fun_type, $.expr_args],
         // `[X, Y || ...]` (multi-template comprehension) vs `[X, Y]` (list)
@@ -1110,7 +1110,7 @@ module.exports = grammar({
 
         replacement_expr_guard: $ => seq(
             field("expr", $._expr),
-            optional($._clause_guard),
+            $._clause_guard,
         ),
 
         replacement_parens: $ => seq('(', ')'),

@@ -3195,7 +3195,7 @@
       },
       "guard": {
         "multiple": false,
-        "required": false,
+        "required": true,
         "types": [
           {
             "type": "guard",
@@ -3261,6 +3261,7 @@
   {
     "type": "source_file",
     "named": true,
+    "root": true,
     "fields": {
       "exprs": {
         "multiple": true,
@@ -3907,7 +3908,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "compile",

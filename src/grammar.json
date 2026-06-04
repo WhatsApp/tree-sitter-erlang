@@ -1,4 +1,5 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "erlang",
   "word": "atom",
   "rules": {
@@ -6317,16 +6318,8 @@
           }
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_clause_guard"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "_clause_guard"
         }
       ]
     },
@@ -7660,8 +7653,7 @@
     ],
     [
       "_macro_def_replacement",
-      "replacement_guard_and",
-      "replacement_expr_guard"
+      "replacement_guard_and"
     ],
     [
       "fun_type",
@@ -7739,5 +7731,6 @@
     "_desc",
     "_string_like"
   ],
+  "reserved": {},
   "@generated": true
 }
