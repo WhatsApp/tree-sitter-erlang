@@ -1,3 +1,6 @@
+0.19.0 (2026-06-04)
+- Make guard required in replacement_expr_guard
+
 0.18.0 (2026-05-19)
 - alias match_catch_pat to match_expr
 
