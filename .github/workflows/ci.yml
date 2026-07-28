@@ -7,12 +7,14 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        os: [macos-latest, ubuntu-latest, windows-latest]
+        # Pinned to windows-2022 (Visual Studio 2022 / v17). The windows-latest
+        # image ships Visual Studio 2026 (v18), whose detection crashes node-gyp
+        # (ERR_CHILD_PROCESS_STDIO_MAXBUFFER), so the native addon fails to build.
+        os: [macos-latest, ubuntu-latest, windows-2022]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
       - run: npm ci
       - run: npm test
-        if: ${{ matrix.os != 'windows-latest' }}
