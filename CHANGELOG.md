@@ -1,3 +1,6 @@
+0.20.0 (2026-07-28)
+- Update tree-sitter/array.h to avoid strict aliasing violations (https://github.com/WhatsApp/tree-sitter-erlang/pull/17)
+
 0.19.0 (2026-06-04)
 - Make guard required in replacement_expr_guard
 
