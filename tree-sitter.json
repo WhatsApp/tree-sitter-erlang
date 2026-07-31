@@ -1,0 +1,49 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "erlang",
+      "camelcase": "Erlang",
+      "scope": "source.erlang",
+      "path": ".",
+      "file-types": [
+        "erl",
+        "hrl",
+        "app.src",
+        "app",
+        "escript",
+        "rebar.config"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ],
+      "injection-regex": "^erlang$"
+    }
+  ],
+  "metadata": {
+    "version": "0.20.0",
+    "license": "Apache-2.0",
+    "description": "Erlang grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Leandro Ostera",
+        "email": "leandro@ostera.io"
+      },
+      {
+        "name": "Alan Zimmerman",
+        "email": "alanzimm@fb.com"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/WhatsApp/tree-sitter-erlang"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

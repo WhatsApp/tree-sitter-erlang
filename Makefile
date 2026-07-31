@@ -30,6 +30,13 @@ gen:
 	python3 -c 'import sys,json; [open(f,"w").write(c) for f in sys.argv[1:] for c in [json.dumps({**json.load(open(f)),"@"+"generated":True},indent=2)+"\n"]]' src/grammar.json
 	python3 -c 'import sys,json; [open(f,"w").write(c) for f in sys.argv[1:] for c in [json.dumps(json.load(open(f))+[{"@"+"generated":True}],indent=2)+"\n"]]' src/node-types.json
 
+.PHONY: gen14
+gen14:
+	$(TREE_SITTER) generate --abi=14
+	python3 -c 'import sys; [open(f,"w").write(c) for f in sys.argv[1:] for c in ["// @"+"generated\n\n"+open(f).read()]]' src/parser.c src/tree_sitter/parser.h src/tree_sitter/alloc.h src/tree_sitter/array.h
+	python3 -c 'import sys,json; [open(f,"w").write(c) for f in sys.argv[1:] for c in [json.dumps({**json.load(open(f)),"@"+"generated":True},indent=2)+"\n"]]' src/grammar.json
+	python3 -c 'import sys,json; [open(f,"w").write(c) for f in sys.argv[1:] for c in [json.dumps(json.load(open(f))+[{"@"+"generated":True}],indent=2)+"\n"]]' src/node-types.json
+
 .PHONY: deps
 deps:
 	npm install

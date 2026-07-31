@@ -15,13 +15,13 @@
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "tree-sitter-cli": "^0.23.0",
+    "tree-sitter-cli": "^0.26.11",
     "prettier": "^2.2.1",
     "node-addon-api": "^7.1.0",
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.22.4"
+    "tree-sitter": "^0.25.1"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -30,22 +30,6 @@
   },
   "main": "bindings/node",
   "types": "bindings/node",
-  "tree-sitter": [
-    {
-      "scope": "source.erlang",
-      "file-types": [
-        "erl",
-        "hrl",
-        "app.src",
-        "app",
-        "escript",
-        "rebar.config"
-      ],
-      "highlights": [
-        "queries/highlights.scm"
-      ]
-    }
-  ],
   "devDependencies": {
     "prebuildify": "^6.0.1",
     "tar-fs": ">=3.1.1"
