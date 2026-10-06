@@ -1784,51 +1784,81 @@
       ]
     },
     "deprecated_fa": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "{"
-        },
-        {
-          "type": "FIELD",
-          "name": "fun",
-          "content": {
-            "type": "SYMBOL",
-            "name": "atom"
-          }
-        },
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "FIELD",
-          "name": "arity",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_deprecated_fun_arity"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "desc",
-          "content": {
-            "type": "CHOICE",
-            "members": [
-              {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "{"
+            },
+            {
+              "type": "FIELD",
+              "name": "fun",
+              "content": {
                 "type": "SYMBOL",
-                "name": "deprecation_desc"
-              },
-              {
-                "type": "BLANK"
+                "name": "atom"
               }
-            ]
-          }
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "FIELD",
+              "name": "arity",
+              "content": {
+                "type": "SYMBOL",
+                "name": "_deprecated_fun_arity"
+              }
+            },
+            {
+              "type": "FIELD",
+              "name": "desc",
+              "content": {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "deprecation_desc"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "}"
+            }
+          ]
         },
         {
-          "type": "STRING",
-          "value": "}"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "FIELD",
+              "name": "fun",
+              "content": {
+                "type": "SYMBOL",
+                "name": "atom"
+              }
+            },
+            {
+              "type": "STRING",
+              "value": "/"
+            },
+            {
+              "type": "FIELD",
+              "name": "arity",
+              "content": {
+                "type": "SYMBOL",
+                "name": "integer"
+              }
+            }
+          ]
         }
       ]
     },

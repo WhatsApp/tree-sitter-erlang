@@ -426,13 +426,22 @@ module.exports = grammar({
             sepBy1(',', field("fa", $.deprecated_fa)),
             ']',
         ),
-        deprecated_fa: $ => seq(
-            '{',
-            field("fun", $.atom),
-            ',',
-            field("arity", $._deprecated_fun_arity),
-            field("desc", optional($.deprecation_desc)),
-            '}',
+        deprecated_fa: $ => choice(
+            seq(
+                '{',
+                field("fun", $.atom),
+                ',',
+                field("arity", $._deprecated_fun_arity),
+                field("desc", optional($.deprecation_desc)),
+                '}',
+            ),
+            // erl_parse rewrites `F/A` to `{F,A}` in attributes, but only
+            // for an integer arity and not inside a tuple.
+            seq(
+                field("fun", $.atom),
+                '/',
+                field("arity", $.integer),
+            ),
         ),
 
         deprecation_desc: $ => seq(',', field("desc", $._desc)),
