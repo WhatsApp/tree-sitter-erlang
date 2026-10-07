@@ -1,3 +1,7 @@
+0.21.0 (2026-10-07)
+- Generate the parser with tree-sitter-cli 0.26.11 and ABI 15
+- Accept `F/A` in `-deprecated` attributes
+
 0.20.0 (2026-07-28)
 - Update tree-sitter/array.h to avoid strict aliasing violations (https://github.com/WhatsApp/tree-sitter-erlang/pull/17)
 
