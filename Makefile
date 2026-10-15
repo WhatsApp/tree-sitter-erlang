@@ -1,6 +1,6 @@
-TREE_SITTER=npx tree-sitter-cli
+TREE_SITTER ?= npx tree-sitter-cli
 
-all: fmt gen test
+all: gen test
 
 fmt:
 	./node_modules/.bin/prettier --write grammar.js
