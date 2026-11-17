@@ -312,6 +312,10 @@
         "named": true
       },
       {
+        "type": "dyn_pattern_marker",
+        "named": true
+      },
+      {
         "type": "external_fun",
         "named": true
       },
@@ -1476,6 +1480,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "dyn_pattern_marker",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "export_attribute",

@@ -107,3 +107,46 @@ f(#record{a = 1}) -> ok.
               (integer)))))
       (clause_body
         (atom)))))
+
+================================================================================
+Dynamic pattern marker
+================================================================================
+
+f(X = :?, {A, B} = : ?) ->
+    case X of
+        Y = :? -> Y
+    end,
+    fun(Z = :?) -> Z end.
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (fun_decl
+    (function_clause
+      (atom)
+      (expr_args
+        (match_expr
+          (var)
+          (dyn_pattern_marker))
+        (match_expr
+          (tuple
+            (var)
+            (var))
+          (dyn_pattern_marker)))
+      (clause_body
+        (case_expr
+          (var)
+          (cr_clause
+            (match_expr
+              (var)
+              (dyn_pattern_marker))
+            (clause_body
+              (var))))
+        (anonymous_fun
+          (fun_clause
+            (expr_args
+              (match_expr
+                (var)
+                (dyn_pattern_marker)))
+            (clause_body
+              (var))))))))

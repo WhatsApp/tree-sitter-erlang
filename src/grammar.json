@@ -3386,6 +3386,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "dyn_pattern_marker"
+        },
+        {
+          "type": "SYMBOL",
           "name": "var"
         },
         {
@@ -6534,6 +6538,19 @@
             "type": "SYMBOL",
             "name": "_macro_name"
           }
+        }
+      ]
+    },
+    "dyn_pattern_marker": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "STRING",
+          "value": "?"
         }
       ]
     },

@@ -423,3 +423,29 @@ Macro type in call
             (call
               (atom)
               (expr_args))))))))
+
+================================================================================
+Dynamic pattern marker in define
+================================================================================
+
+-define(dyn_pattern, :?).
+-define(CALL, m:?F(1)).
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (pp_define
+    (macro_lhs
+      (atom))
+    (dyn_pattern_marker))
+  (pp_define
+    (macro_lhs
+      (var))
+    (remote
+      (remote_module
+        (atom))
+      (macro_call_expr
+        (var)
+        (macro_call_args
+          (macro_expr
+            (integer)))))))

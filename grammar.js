@@ -669,6 +669,7 @@ module.exports = grammar({
             $.string,
             $.concatables,
             $._macro_body_expr,
+            $.dyn_pattern_marker,
             $.var,
             $.list,
             $.binary,
@@ -1155,6 +1156,9 @@ module.exports = grammar({
             '?', '?',
             field("name", $._macro_name),
         ),
+
+        // ELP-specific: `:?` marks a dynamic clause pattern `Pat = :?` for eqWAlizer
+        dyn_pattern_marker: $ => seq(':', '?'),
 
         macro_expr: $ => choice(
             field("expr", $._expr),
