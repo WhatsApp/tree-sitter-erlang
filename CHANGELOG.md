@@ -1,3 +1,6 @@
+0.22.0 (2026-11-18)
+- Parse the `:?` dynamic pattern marker used by eqwalizer
+
 0.21.0 (2026-10-07)
 - Generate the parser with tree-sitter-cli 0.26.11 and ABI 15
 - Accept `F/A` in `-deprecated` attributes
